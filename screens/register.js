@@ -43,7 +43,7 @@ class RegisterPage extends Component {
             <View style={{flexDirection: 'row'}}>
             <Text style={styles.policy2}> Do you have an account ? </Text>
             <TouchableOpacity onPress={ () => this.props.navigation.goBack()}>
-              <Text style={styles.policy}>Register</Text >
+              <Text style={styles.policy}>Login</Text >
              </TouchableOpacity>
             </View>
           </View>

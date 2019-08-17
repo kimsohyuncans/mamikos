@@ -20,7 +20,7 @@ class LoginPage extends Component {
 
         
           
-          <Image source={require('../src/img/login.png')} style={{width:'100%',height: 370}}/>
+          <Image source={require('../src/img/login.png')} style={{width:'100%',height: 370, elevation: 10}}/>
           <View style= {styles.container}>
             {/*Input Login*/}
 
@@ -44,7 +44,7 @@ class LoginPage extends Component {
             <View style={{flexDirection: 'row'}}>
             <Text style={styles.policy2}>Don't have an account ? </Text>
               <TouchableOpacity onPress={ () => this.props.navigation.navigate('register')}>
-                <Text style={styles.policy}>Login</Text>
+                <Text style={styles.policy}>Register</Text>
               </TouchableOpacity>
             </View>
           </View>

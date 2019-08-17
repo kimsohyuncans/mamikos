@@ -146,7 +146,7 @@ export default class Explore extends Component {
 
                   {/* TERTARIK MENGIKLANKAN KOSMU? */}
                   <View style={{backgroundColor: 'white', flex: 1, marginHorizontal: 20, justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center', marginTop: 10}}>
-                    <Text style={{fontSize: 17, fontFamily: 'Lato-Regular'}}>Tertarik mengiklankan kosmuss ?</Text>
+                    <Text style={{fontSize: 17, fontFamily: 'Lato-Regular'}}>Tertarik mengiklankan kosmu ?</Text>
                     <Button warning style={{borderRadius: 10, height: 30, backgroundColor: '#ec7e2f'}} onPress={()=> this.props.navigation.navigate('addadvertisement')}><Text style={{color: 'white', fontSize: 10, fontFamily: 'Lato-Regular'}}>Pasang Iklan</Text></Button>
                   </View>
 

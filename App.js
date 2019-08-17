@@ -40,11 +40,11 @@ const HomeStack = createStackNavigator({
 	},
 
 	searchkost : {
-		screen : createStackNavigator({
+		screen : CariKost
+	},
 
-			listkost : { screen : CariKost},
-			detailkost : { screen : DetailPage}
-		})
+	detailkost :  {
+		screen : DetailPage
 	},
 
 	addadvertisement : {

@@ -20,15 +20,19 @@ import { Container,
 
 export default class DetailPage extends Component {
 
+  static navigationOptions = {
+    header: null
+  }
 
-handleClick(){alert('Button clicked!');}
+
+  goBack = () => this.props.navigation.goBack();
 
   render() {
     return (
       <Container>
         <Header style={{backgroundColor: 'white'}} androidStatusBarColor='#0baa56'>
         <Left style={{marginLeft: -10}}>
-            <Button style={{backgroundColor: 'white', elevation: 0}}>
+            <Button style={{backgroundColor: 'white', elevation: 0}} onPress={this.goBack}>
             <Icon style={{color: '#0baa56'}} name="arrow-back" />
             </Button>
           </Left>
