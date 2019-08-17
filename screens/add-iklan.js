@@ -20,7 +20,7 @@ import { Container,
 
    } from 'native-base';
 
-import {View,TouchableOpacity,ScrollView,StyleSheet} from 'react-native';
+import {View,TouchableOpacity,ScrollView,StyleSheet,Image} from 'react-native';
 
 import Map from './map'
 
@@ -169,7 +169,12 @@ export default class AddAdvertisementPage extends Component {
 		       			<Input placeholder="masukkan sepeti nama jalan , kelurahan,kecamatan,kota,dst" />
 		       		</Item>
 		       		<Label style={styles.label}>Masukkan Foto</Label>
-		       		<TouchableOpacity onPress={() => alert('hello')} style={{backgroundColor: 'pink',height: 100,width: 100}}/>
+		       		
+
+		       		<TouchableOpacity onPress={() => alert('hello')} style={{width: 100,height: 100}}>
+
+		       			<Image source={require('../src/icon/addimage.png')} style={{width: '100%',height:'100%',resizeMode: 'contain'}}/>
+		       		</TouchableOpacity>
 
 		       		<Label style={styles.label}>Kontak yang bisa di hubungi</Label>
 		       		<Label>Nama</Label>
@@ -189,7 +194,7 @@ export default class AddAdvertisementPage extends Component {
 
         </Content>
         	<View style={{justifyContent: 'center',alignItems:'center'}}>
-		   		<Button warning style={{width: '95%',justifyContent:'center'}}>
+		   		<Button onPress={()=>this.props.navigation.navigate('searchkost')} warning style={{width: '95%',justifyContent:'center'}}>
 		   			<Text>Submit</Text>
 		   		</Button>
 		   	</View>

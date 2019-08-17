@@ -33,6 +33,8 @@ export default class CariKost extends Component {
     static navigationOptions = {
       header: null
     }
+
+    goBack = () => this.props.navigation.goBack();
   
   
   render() {
@@ -42,7 +44,7 @@ export default class CariKost extends Component {
          {/* HEADERNYA BOSQ */}
         <Header searchBar rounded style={{backgroundColor: 'white', elevation: 0, borderBottomWidth: 0}} androidStatusBarColor="#0baa56">
           <Left style={{marginLeft: -10}}>
-            <Button style={{backgroundColor: 'white', elevation: 0}}>
+            <Button style={{backgroundColor: 'white', elevation: 0}} onPress={this.goBack}>
             <Icon style={{color: '#0baa56'}} name="arrow-back" />
             </Button>
           </Left>
@@ -55,12 +57,12 @@ export default class CariKost extends Component {
           </Button>
         </Header>
 
-        <Tabs tabBarUnderlineStyle={{backgroundColor: '#0baa56'} } renderTabBar={()=> <ScrollableTab  style={{backgroundColor: 'white'}} />} style={{elevation: 0, borderTopWidth: 0, backgroundColor: '#0baa56'}}>
+       <Tabs tabBarUnderlineStyle={{backgroundColor: '#0baa56'} } renderTabBar={()=> <ScrollableTab  style={{backgroundColor: 'white'}} />} style={{elevation: 0, borderTopWidth: 0, backgroundColor: '#0baa56'}}>
           <Tab heading="Lihat Peta" tabStyle={{backgroundColor: 'white'}} activeTabStyle={{backgroundColor: 'white'}} activeTextStyle={{color: '#0ba56', fontFamily: 'Lato-Semibold'}} textStyle={{color: '#0baa56', fontFamily: 'Lato-Semibold'}} tabContainerStyle={{ borderTopWidth: 0}} >
             <LihatPeta />
           </Tab>
           <Tab heading="Daftar Kost" tabStyle={{backgroundColor: 'white'}} activeTabStyle={{backgroundColor: 'white'}} activeTextStyle={{color: '#0baa56', fontFamily: 'Lato-Semibold'}} textStyle={{color: '#0baa56', fontFamily: 'Lato-Semibold'}} tabContainerStyle={{ borderTopWidth: 0 }}>
-            <DaftarKost />  
+            <DaftarKost okeoce={this.props.navigation} />  
           </Tab>
         </Tabs>
       </Container>
@@ -73,7 +75,7 @@ export default class CariKost extends Component {
 class LihatPeta extends Component {
     render(){
         return(
-         <Map />            
+         <Map />        
         )
     }
 }
@@ -83,6 +85,9 @@ class DaftarKost extends Component {
         super(props)
     }
 
+    handleNavigateDetail() {
+        this.props.okeoce.navigate('detailkost')
+    }
 
     render(){
         return(
@@ -90,7 +95,7 @@ class DaftarKost extends Component {
                 <ScrollView vertical showsVerticalScrollIndicator={false}>
                     <Content>
 
-                    <TouchableOpacity navigation={this.props.navigation} onPress={() => this.props.navigation.navigate('detail')} >
+                    <TouchableOpacity onPress={() => this.handleNavigateDetail()} >
                         <View style={{backgroundColor: 'white', height: 320, marginTop: 20, marginHorizontal: 10}}>
                             <View style={{ justifyContent: 'center', alignItems: 'center'}}>
                                 <Image source={require('../src/img/list/kost1.jpg')} style={{ width: 330, height: 200, borderRadius: 5, marginHorizontal: 0}}></Image>
