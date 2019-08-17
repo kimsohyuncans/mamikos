@@ -16,7 +16,7 @@ class LoginPage extends Component {
   render() {
     return (
       <KeyboardAwareScrollView>
-        <View style={{flex:1,backgroundColor: 'white'}}>
+        <View style={{flex:1,backgroundColor: 'white'}} androidStatusBarColor="#0baa56">
 
         
           
@@ -39,12 +39,12 @@ class LoginPage extends Component {
               
 
             <Button onPress={() => this.props.navigation.navigate('Home')} style={styles.button}>
-                <Text style={styles.loginText}>Login</Text>    
+                <Text style={styles.loginText}>{"Login"}</Text>    
             </Button>
             <View style={{flexDirection: 'row'}}>
-            <Text style={styles.policy2}> Don't have an account ? </Text>
+            <Text style={styles.policy2}>Don't have an account ? </Text>
               <TouchableOpacity onPress={ () => this.props.navigation.navigate('register')}>
-                <Text style={styles.policy}> Register </Text>
+                <Text style={styles.policy}>Login</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -71,10 +71,10 @@ const styles = StyleSheet.create({
       height: '45%'
     },
 
-    form : { width:'65%' },
+    form : { width: 260, marginLeft: -20 },
 
     item : {
-      marginTop:'20%',
+      marginTop: 50,
       borderBottomColor: '#0baa56',
       borderBottomWidth: 1
     },
@@ -82,28 +82,31 @@ const styles = StyleSheet.create({
     labelText : {color:'#a6a6a6'},
 
     button : {
-      width: '90%',
-      flex:0.8,
+      width: 260,
       backgroundColor: '#39bd77',
       marginTop:'20%',
-      justifyContent:'center',
       borderRadius: 20,
+      justifyContent:'center',
       alignItems:'center',
+      elevation: 5
     },
 
     loginText : {
+      fontFamily: 'Lato-Regular',
       color:'white',
       fontSize: 20,
-      marginBottom: '5%'
+      marginBottom: 8
     },
 
     policy : {
+      fontFamily: 'Lato-Regular',
       color:'#0baa56',
       textDecorationLine:'underline',
       marginTop:20
     },
 
     policy2 : {
+      fontFamily: 'Lato-Regular',
       color:'gray',
       marginTop:20
     }
