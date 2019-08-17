@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {View , Image, Text,TextInput,StyleSheet,TouchableOpacity} from 'react-native';
-import { Container, Header, Left, Body, Right, Title,Button,Form,Item,Icon,Input,Label,ScrollView} from 'native-base';
+import {View , Image, Text,TextInput,StyleSheet,TouchableOpacity,ScrollView} from 'react-native';
+import { Container, Header, Left, Body, Right, Title,Button,Form,Item,Icon,Input,Label} from 'native-base';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 import AddAdvertisement from './add-iklan';
@@ -16,7 +16,12 @@ class LoginPage extends Component {
   render() {
     return (
       <KeyboardAwareScrollView>
+<<<<<<< HEAD
         <View style={{flex:1,backgroundColor: 'white'}} androidStatusBarColor="#0baa56">
+=======
+      <ScrollView>
+        <View style={{flex:1,backgroundColor: 'white'}}>
+>>>>>>> origin
 
         
           
@@ -24,7 +29,7 @@ class LoginPage extends Component {
           <View style= {styles.container}>
             {/*Input Login*/}
 
-          
+            
               <Form style={styles.form}>
 
                 <Item style={styles.item} floatingLabel>
@@ -36,19 +41,28 @@ class LoginPage extends Component {
                   <Input />
                 </Item>
               </Form>
-              
+            
 
             <Button onPress={() => this.props.navigation.navigate('Home')} style={styles.button}>
                 <Text style={styles.loginText}>{"Login"}</Text>    
             </Button>
+<<<<<<< HEAD
             <View style={{flexDirection: 'row'}}>
             <Text style={styles.policy2}>Don't have an account ? </Text>
               <TouchableOpacity onPress={ () => this.props.navigation.navigate('register')}>
                 <Text style={styles.policy}>Register</Text>
               </TouchableOpacity>
+=======
+            <View style={{flexDirection: 'row',marginBottom: 20}}>
+              <Text style={styles.policy2}> Don't have an account ? </Text>
+                <TouchableOpacity onPress={ () => this.props.navigation.navigate('register')}>
+                  <Text style={styles.policy}> Register </Text>
+                </TouchableOpacity>
+>>>>>>> origin
             </View>
           </View>
         </View>
+      </ScrollView>
       </KeyboardAwareScrollView>
       
       
@@ -76,13 +90,18 @@ const styles = StyleSheet.create({
     item : {
       marginTop: 50,
       borderBottomColor: '#0baa56',
-      borderBottomWidth: 1
+      borderBottomWidth: 1, 
     },
 
     labelText : {color:'#a6a6a6'},
 
     button : {
+<<<<<<< HEAD
       width: 260,
+=======
+      width: '65%',
+      flex:0.8,
+>>>>>>> origin
       backgroundColor: '#39bd77',
       marginTop:'20%',
       borderRadius: 20,
