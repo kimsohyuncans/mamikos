@@ -70,31 +70,33 @@ export default class AddAdvertisementPage extends Component {
         <Content style={styles.content}>
         	
 
-        {/*Form Barang Dan Jasa*/}
-	        	<Form style={styles.form}>
-	        		<Label style={styles.label}>Judul Iklan</Label>
-	        		<Item >
-	        			<Input placeholder="Masukan Judul Iklan" onFocus={this.FocusChange}/>
+		{/*Form Barang Dan Jasa*/}
+				<View style={{marginLeft: 0}}>
+	        		
+					<Form style={styles.form}>
+					<View style={{marginLeft: 15}}>
+					<Label style={styles.label}>Judul Iklan</Label>
+					</View>
+	        		<Item  >
+	        			<Input  style={{marginLeft: -5}} placeholderTextColor="#bcbcbc" placeholder="Masukan judul iklan kost"/>
 	        		</Item>
+					<View style={{marginLeft: 15}}>
 	        		<Label style={styles.label}>Harga Kost</Label>
+					</View>
 	        		<Item >
-	        			<Input placeholder="Masukan Harga Kost"/>
+	        			<Input style={{marginLeft: -5}} placeholderTextColor="#bcbcbc"  placeholder="Masukan harga kost, misalnya: 80000"/>
 	        		</Item>
+						<View style={{marginLeft: 10}}>
 	        			<Label style={styles.label}>Deskripsi Kost</Label>
-	        			<Textarea rowSpan={2} placeholder="Masukan Deskripsi Kost" style={styles.textarea}/>
+						</View>
+	        			<Textarea rowSpan={3.5} placeholderTextColor="#bcbcbc"  placeholder="Masukan Deskripsi Kost, misalnya: Kost sudah termasuk kasur, dekat dengan Bootcamp Arkademy, listrik ditanggung lucinta " style={styles.textarea}/>
 
 
-	        			
-		       			
-		       		
-
-	          
-		       		
-		       		<Label style={{marginTop: 20, fontFamily: 'Lato-Semibold', fontSize: 20}}>Lokasi Kost</Label>
+		       		<Label style={{marginTop: 20, fontFamily: 'Lato-Semibold', fontSize: 20, marginLeft: 10}}>Lokasi Kost</Label>
 		       		<Item>
-		       			<Icon name='ios-search'/>
-		       			<Input placeholder="Search"/>
-		       			<Button success><Text>Ubah Lokasi </Text></Button>
+		       			<Icon style name='ios-search'/>
+		       			<Input style={{ fontFamily: 'Lato-Semibold', fontSize: 16}} placeholderTextColor="#bcbcbc" placeholder="Search"/>
+		       			<Button style={{borderRadius: 10, backgroundColor: '#0baa56', marginRight: -10}}><Text uppercase={false}>Ubah Lokasi </Text></Button>
 		       		</Item>
 
 
@@ -106,32 +108,41 @@ export default class AddAdvertisementPage extends Component {
 
 		       {/*Form detail penjual*/}
 		       <Form style={styles.form}>
+			       <View style={{marginLeft: 10}}>
 		       		<Label style={styles.label}>Tuliskan alamat lengkap penjual</Label>
+					</View>
 		       		<Item>
-		       			<Input placeholder="masukkan sepeti nama jalan , kelurahan,kecamatan,kota,dst" />
+		       			<Input rowSpan={4} style={{marginLeft: -10}} placeholderTextColor="#bcbcbc" placeholder="Masukan alamat misalnya: jalan, kecamatan, dll" />
 		       		</Item>
+					<View style={{marginLeft: 10}}>
 		       		<Label style={styles.label}>Masukkan Foto</Label>
 		       		
 
 		       		<TouchableOpacity onPress={() => alert('hello')} style={{width: 100,height: 100}}>
 
-		       			<Image source={require('../src/icon/addimage.png')} style={{width: '100%',height:'100%',resizeMode: 'contain'}}/>
+		       			<Image source={require('../src/icon/addimage.png')} style={{width: 138,height:110,resizeMode: 'contain',marginTop: 10, marginBottom: 20}}/>
 		       		</TouchableOpacity>
-
-		       		<Label style={styles.label}>Kontak yang bisa di hubungi</Label>
-		       		<Label>Nama</Label>
-		       		<Item>
-		       			<Input placeholder='tulis nama lengkap anda atau sapaan anda'/>
+					   <Label style={{fontFamily: 'Lato-Semibold', fontSize: 19, marginTop: 40}}>Nama Depan dan Belakang</Label>
+		       		<Item style={{ marginLeft: -5}}>
+		       			<Input  placeholderTextColor="#bcbcbc" placeholder='Masukan nama lengkap atau sapaan anda'/>
 		       		</Item>
-		       		<Label style={styles.label}>Nomor Telepon / HP</Label>
-		       		<Item floatingLabel style={{marginBottom: 100}}>
-		       			<Input/>
+					   <Label style={{fontFamily: 'Lato-Semibold', fontSize: 19, marginTop: 40}}>Nomor Telepon</Label>
+		       		<Item style={{ marginLeft: -5}}>
+		       			<Input  placeholderTextColor="#bcbcbc" placeholder='Masukan nomor telepon anda'/>
 		       		</Item>
+					</View>
+		       		
 
 
 		       </Form>
-		    
-		  
+
+			   {/* KAKI */}
+			   <View style={{justifyContent: 'center', alignItems: 'center'}}>
+			   <Button style={{marginTop: 50, marginBottom: 50, justifyContent: 'center', alignItems: 'center', width: 300, backgroundColor: '#0baa56', borderRadius: 10}}><Text>Submit</Text></Button>
+			   </View>
+
+
+			   </View>
 
 		  
         </Content>
@@ -146,16 +157,20 @@ const styles = StyleSheet.create({
 		backgroundColor: '#0baa56'
 	},
 	content:{
-		marginHorizontal: 15
+		marginHorizontal:20
 	},
 	form : {
-		width:'95%',
-		justifyContent:'center',
+		marginLeft: -10,
+		width:'100%',
+		justifyContent:'center'
 	},
 	textarea : {
-		width:'90%',
+		width: "100%",
 		borderBottomWidth: 1,
-		borderBottomColor: 'green'
+		borderBottomColor: '#dbdbdb',
+		fontFamily: 'Lato-Semibold',
+		fontSize: 16,
+		marginLeft: 0
 	},
 
 	
@@ -174,13 +189,15 @@ const styles = StyleSheet.create({
 		height: 200,
 		width: '100%',
 		borderWidth: 1,
-		marginTop:20
+		marginTop:20,
+		borderColor: '#dbdbdb'
 	},
 	
 	label:{
 		marginTop: 20,
 		fontFamily: 'Lato-Semibold',
-		fontSize: 19
-		
+		fontSize: 19,
+		marginLeft: 0
+
 	}
 })

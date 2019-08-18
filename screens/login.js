@@ -15,14 +15,15 @@ class LoginPage extends Component {
 
   render() {
     return (
+      
       <KeyboardAwareScrollView>
       <ScrollView>
-        <View style={{flex:1,backgroundColor: 'white'}}>
+        <View style={{flex:1,backgroundColor: 'white'}} >
 
         
           
           <Image source={require('../src/img/login.png')} style={{width:'100%',height: 370, elevation: 10}}/>
-          <View style= {styles.container}>
+          <View style= {styles.container} >
             {/*Input Login*/}
 
             
@@ -32,9 +33,10 @@ class LoginPage extends Component {
                   <Label style={styles.labelText}>Username</Label>
                   <Input />
                 </Item>
+                
                 <Item style={styles.item} floatingLabel>
-                  <Label style={styles.labelText}>Password</Label>
-                  <Input />
+                <Label style={styles.labelText} >Password</Label>
+                  <Input secureTextEntry={true} />
                 </Item>
               </Form>
             

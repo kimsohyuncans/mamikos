@@ -21,11 +21,11 @@ export default class ProfilePage extends Component{
 
 						{/*Thumbnail & name*/}
 						<View style={{flexDirection:'row',color:'white',justifyContent:'center'}}>
-							<Thumbnail source={require('../src/img/user.png')}/>
-							<Text style={{marginTop:20, color: '#FFFFFF',fontweight:'bold'}}> niki ganteng </Text>
+							<Thumbnail style={{width: 50, height: 50, marginTop: 10, marginLeft: 10}} source={require('../src/img/user.jpg')}/>
+							<Text style={{marginTop:25, color: '#FFFFFF',fontweight:'bold', marginLeft: 10}}>John Doe</Text>
 						</View>
 
-						<Button hasText transparent style={{paddingRight:20}}>
+						<Button hasText transparent style={{paddingRight:20, marginTop: 10}}>
 							<Text style={{color:'#FFFFFF'}}>
 								Edit profile
 							</Text> 
@@ -42,8 +42,8 @@ export default class ProfilePage extends Component{
 						<CardItem style={{height: '100%'}}>
 							<Body style={{justifyContent:'center',flexDirection:'row'}}>
 								<Button transparent style={{flex:1,flexDirection:'column'}} onPress={() => alert('anjay mabar 1')}><Image source={require('../src/img/kontrak.png')} style={{width: 25,height: 25}}/><Text style={{textAlign:'center'}}>Kontrak</Text></Button>
-								<Button transparent style={{flex:1,flexDirection:'column'}} onPress={() => alert('anjay mabar 2')}><Image source={require('../src/img/tagihan.png')} style={{width: 25,height: 25}} /><Text style={{textAlign:'center'}}>tagihan</Text></Button>
-								<Button transparent style={{flex:1,flexDirection:'column'}}><Image source={require('../src/img/komplain.png')} style={{width: 25,height: 25}} /><Text style={{textAlign:'center'}}>Komplain & Perbaikan</Text></Button>
+								<Button transparent style={{flex:1,flexDirection:'column'}} onPress={() => alert('anjay mabar 2')}><Image source={require('../src/img/tagihan.png')} style={{width: 25,height: 25}} /><Text style={{textAlign:'center'}}>Tagihan</Text></Button>
+								<Button transparent style={{flex:1,flexDirection:'column'}}><Image source={require('../src/img/komplain.png')} style={{width: 25,height: 25}} /><Text style={{textAlign:'center'}}>Komplain</Text></Button>
 								<Button transparent style={{flex:1,flexDirection:'column'}}><Image source={require('../src/img/kios.png')} style={{width: 25,height: 25}} /><Text style={{textAlign:'center'}}>Kios</Text></Button>
 
 							</Body>

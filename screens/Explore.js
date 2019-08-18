@@ -77,8 +77,8 @@ export default class Explore extends Component {
 
   _renderImage ({item, index}) {
     return (
-      <View >
-          <View>
+      <View  >
+          <View >
           { item.image }
           </View>
           
@@ -137,6 +137,12 @@ export default class Explore extends Component {
                     renderItem={this._renderImage}
                     sliderWidth={400}
                     itemWidth={300}
+                    autoplay={true}
+                    enableMomentum={false}
+                    lockScrollWhileSnapping={false}
+                    loop={true}
+                    
+                    
                     />
                     <View style={{ marginTop: -50 }}>
                     { this.pagination } 
@@ -147,7 +153,7 @@ export default class Explore extends Component {
                   {/* TERTARIK MENGIKLANKAN KOSMU? */}
                   <View style={{backgroundColor: 'white', flex: 1, marginHorizontal: 20, justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center', marginTop: 10}}>
                     <Text style={{fontSize: 17, fontFamily: 'Lato-Regular'}}>Tertarik mengiklankan kosmu ?</Text>
-                    <Button warning style={{borderRadius: 10, height: 30, backgroundColor: '#ec7e2f'}} onPress={()=> this.props.navigation.navigate('addadvertisement')}><Text style={{color: 'white', fontSize: 10, fontFamily: 'Lato-Regular'}}>Pasang Iklan</Text></Button>
+                    <Button warning style={{borderRadius: 10, height: 30, backgroundColor: '#ec7e2f'}} onPress={()=> this.props.navigation.navigate('addadvertisement')}><Text style={{color: 'white', fontSize: 13, fontFamily: 'Lato-Semibold'}} uppercase={false}>Pasang Iklan</Text></Button>
                   </View>
 
                   {/* KOTA POPULER */}
@@ -281,9 +287,9 @@ const styles = StyleSheet.create({
   imagepromo: {
     width: '100%', 
     height: '100%', 
-    resizeMode: 'contain', 
-    borderRadius: 10,
-    elevation: 10
+    resizeMode: 'contain',
+
+
   },
 
 });

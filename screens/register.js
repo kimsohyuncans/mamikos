@@ -32,7 +32,7 @@ class RegisterPage extends Component {
                 </Item>
                 <Item style={styles.item} floatingLabel>
                   <Label style={styles.labelText}>Password</Label>
-                  <Input />
+                  <Input secureTextEntry={true} />
                 </Item>
               </Form>
               
