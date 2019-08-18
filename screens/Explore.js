@@ -26,7 +26,7 @@ export default class Explore extends Component {
     header: null
   }
 
-  handleClick(){alert('Button clicked!');}
+  
 
   get pagination () {
     const { entries, activeSlide } = this.state;
@@ -221,7 +221,7 @@ export default class Explore extends Component {
             </Button>
             </TouchableOpacity>
             <Button vertical>
-              <Icon name="md-calendar" style={{color: '#9E9E9E'}} />
+              <Icon name="md-calendar" style={{color: '#9E9E9E'}} onPress={() => this.props.navigation.navigate('listbooking')} />
               <Text style={{color: '#9E9E9E'}}>Booking</Text>
             </Button>
             <Button vertical onPress={()=> this.props.navigation.navigate('profilePage')}>

@@ -16,92 +16,68 @@ class LoginPage extends Component {
   render() {
     return (
       <KeyboardAwareScrollView>
+        <ScrollView>
+          <View style={{flex:1,backgroundColor: 'white'}}>
 
-        <View style={{flex:1,backgroundColor: 'white'}} androidStatusBarColor="#0baa56">
-
-      <ScrollView>
-        <View style={{flex:1,backgroundColor: 'white'}}>
-
-
-        
           
-          <Image source={require('../src/img/login.png')} style={{width:'100%',height: 370, elevation: 10}}/>
-          <View style= {styles.container}>
-            {/*Input Login*/}
-
             
-              <Form style={styles.form}>
+            <Image source={require('../src/img/login.png')} style={{width:'100%',height: 370, elevation: 10}}/>
+            <View style= {styles.container}>
+              {/*Input Login*/}
 
-                <Item style={styles.item} floatingLabel>
-                  <Label style={styles.labelText}>Username</Label>
-                  <Input />
-                </Item>
-                <Item style={styles.item} floatingLabel>
-                  <Label style={styles.labelText}>Password</Label>
-                  <Input />
-                </Item>
-              </Form>
-            
+              
+                <Form style={styles.form}>
 
-            <Button onPress={() => this.props.navigation.navigate('Home')} style={styles.button}>
-                <Text style={styles.loginText}>{"Login"}</Text>    
-            </Button>
+                  <Item style={styles.item} floatingLabel>
+                    <Label style={styles.labelText}>Username</Label>
+                    <Input />
+                  </Item>
+                  <Item style={styles.item} floatingLabel>
+                    <Label style={styles.labelText}>Password</Label>
+                    <Input />
+                  </Item>
+                </Form>
+              
 
-            <View style={{flexDirection: 'row'}}>
-            <Text style={styles.policy2}>Don't have an account ? </Text>
-              <TouchableOpacity onPress={ () => this.props.navigation.navigate('register')}>
-                <Text style={styles.policy}>Register</Text>
-              </TouchableOpacity>
-
-            <View style={{flexDirection: 'row',marginBottom: 20}}>
-              <Text style={styles.policy2}> Don't have an account ? </Text>
-                <TouchableOpacity onPress={ () => this.props.navigation.navigate('register')}>
-                  <Text style={styles.policy}> Register </Text>
-                </TouchableOpacity>
-
+              <Button onPress={() => this.props.navigation.navigate('Home')} style={styles.button}>
+                  <Text style={styles.loginText}>{"Login"}</Text>    
+              </Button>
+              <View style={{flexDirection: 'row',marginBottom: 20}}>
+                <Text style={styles.policy2}> Don't have an account ? </Text>
+                  <TouchableOpacity onPress={ () => this.props.navigation.navigate('register')}>
+                    <Text style={styles.policy}>Register</Text>
+                  </TouchableOpacity>
+              </View>
             </View>
           </View>
-        </View>
-      </ScrollView>
+        </ScrollView>
       </KeyboardAwareScrollView>
       
       
     );
   }
 }
-
-
 export default LoginPage
-
 const styles = StyleSheet.create({
   container : { 
     flex:1,
     alignItems:'center',
     backgroundColor:'white'
     },
-
     banner : {
       width: '100%',
       height: '45%'
     },
-
     form : { width: 260, marginLeft: -20 },
-
     item : {
       marginTop: 50,
       borderBottomColor: '#0baa56',
       borderBottomWidth: 1, 
     },
-
     labelText : {color:'#a6a6a6'},
-
     button : {
-
-      width: 260,
-
       width: '65%',
       flex:0.8,
-
       backgroundColor: '#39bd77',
       marginTop:'20%',
       borderRadius: 20,
@@ -109,25 +85,21 @@ const styles = StyleSheet.create({
       alignItems:'center',
       elevation: 5
     },
-
     loginText : {
       fontFamily: 'Lato-Regular',
       color:'white',
       fontSize: 20,
       marginBottom: 8
     },
-
     policy : {
       fontFamily: 'Lato-Regular',
       color:'#0baa56',
       textDecorationLine:'underline',
       marginTop:20
     },
-
     policy2 : {
       fontFamily: 'Lato-Regular',
       color:'gray',
       marginTop:20
     }
-
 })

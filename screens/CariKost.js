@@ -62,7 +62,7 @@ export default class CariKost extends Component {
             <LihatPeta />
           </Tab>
           <Tab heading="Daftar Kost" tabStyle={{backgroundColor: 'white'}} activeTabStyle={{backgroundColor: 'white'}} activeTextStyle={{color: '#0baa56', fontFamily: 'Lato-Semibold'}} textStyle={{color: '#0baa56', fontFamily: 'Lato-Semibold'}} tabContainerStyle={{ borderTopWidth: 0 }}>
-            <DaftarKost okeoce={this.props.navigation} />  
+            <SearchKostPage okeoce={this.props.navigation} />  
           </Tab>
         </Tabs>
       </Container>
@@ -80,7 +80,7 @@ class LihatPeta extends Component {
     }
 }
  
-class DaftarKost extends Component {
+class SearchKostPage extends Component {
     constructor(props){
         super(props)
     }
@@ -95,7 +95,7 @@ class DaftarKost extends Component {
                 <ScrollView vertical showsVerticalScrollIndicator={false}>
                     <Content>
 
-                    <TouchableOpacity onPress={() => this.handleNavigateDetail()} >
+                    <TouchableOpacity  onPress={() => this.handleNavigateDetail()} >
                         <View style={{backgroundColor: 'white', height: 320, marginTop: 20, marginHorizontal: 10}}>
                             <View style={{ justifyContent: 'center', alignItems: 'center'}}>
                                 <Image source={require('../src/img/list/kost1.jpg')} style={{ width: 330, height: 200, borderRadius: 5, marginHorizontal: 0}}></Image>

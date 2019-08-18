@@ -18,21 +18,39 @@ import { Container,
        } from 'native-base';
 
 
+
 export default class DetailPage extends Component {
 
   static navigationOptions = {
     header: null
   }
 
+  constructor(props) {
+    super(props);
+    this.state = {};
 
-  goBack = () => this.props.navigation.goBack();
+    this.nextPage = this.nextPage.bind(this);
+    this.previousPage = this.previousPage.bind(this)
+}
+
+  nextPage(destination) {
+    const { navigate } = this.props.navigation; 
+    navigate(destination);
+  };
+
+  previousPage() {
+    const { goBack } = this.props.navigation;
+    goBack();
+  }
+
+
 
   render() {
     return (
       <Container>
         <Header style={{backgroundColor: 'white'}} androidStatusBarColor='#0baa56'>
         <Left style={{marginLeft: -10}}>
-            <Button style={{backgroundColor: 'white', elevation: 0}} onPress={this.goBack}>
+            <Button style={{backgroundColor: 'white', elevation: 0}} onPress={() => this.previousPage()}>
             <Icon style={{color: '#0baa56'}} name="arrow-back" />
             </Button>
           </Left>
@@ -191,7 +209,7 @@ export default class DetailPage extends Component {
                 Hubungi Kost
               </Text>
             </Button>
-            <Button onPress={this.handleClick} style={{borderRadius: 10, height: 40, width: '50%', backgroundColor: '#ec7e2f', justifyContent: 'center', alignItems: 'center'}}>
+            <Button onPress={() => this.nextPage('booking')} style={{borderRadius: 10, height: 40, width: '50%', backgroundColor: '#ec7e2f', justifyContent: 'center', alignItems: 'center'}}>
               <Text style={{color: 'white', fontSize: 14, fontFamily: 'Lato-Semibold', textAlign: 'center'}} uppercase={false}>
                 Booking
               </Text>
