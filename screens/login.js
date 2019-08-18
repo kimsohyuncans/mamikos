@@ -16,12 +16,8 @@ class LoginPage extends Component {
   render() {
     return (
       <KeyboardAwareScrollView>
-<<<<<<< HEAD
-        <View style={{flex:1,backgroundColor: 'white'}} androidStatusBarColor="#0baa56">
-=======
       <ScrollView>
         <View style={{flex:1,backgroundColor: 'white'}}>
->>>>>>> origin
 
         
           
@@ -46,19 +42,11 @@ class LoginPage extends Component {
             <Button onPress={() => this.props.navigation.navigate('Home')} style={styles.button}>
                 <Text style={styles.loginText}>{"Login"}</Text>    
             </Button>
-<<<<<<< HEAD
-            <View style={{flexDirection: 'row'}}>
-            <Text style={styles.policy2}>Don't have an account ? </Text>
-              <TouchableOpacity onPress={ () => this.props.navigation.navigate('register')}>
-                <Text style={styles.policy}>Register</Text>
-              </TouchableOpacity>
-=======
             <View style={{flexDirection: 'row',marginBottom: 20}}>
               <Text style={styles.policy2}> Don't have an account ? </Text>
                 <TouchableOpacity onPress={ () => this.props.navigation.navigate('register')}>
-                  <Text style={styles.policy}> Register </Text>
+                  <Text style={styles.policy}>Register</Text>
                 </TouchableOpacity>
->>>>>>> origin
             </View>
           </View>
         </View>
@@ -96,12 +84,8 @@ const styles = StyleSheet.create({
     labelText : {color:'#a6a6a6'},
 
     button : {
-<<<<<<< HEAD
-      width: 260,
-=======
       width: '65%',
       flex:0.8,
->>>>>>> origin
       backgroundColor: '#39bd77',
       marginTop:'20%',
       borderRadius: 20,

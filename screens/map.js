@@ -11,21 +11,22 @@ import {
 
 
 export default class Map extends Component{
+  
   render(){
     return(
       <View style={{flex:1}}>
         <MapView
         initialRegion={{
-          latitude: 37.78825,
-          longitude: -122.4324,
+          latitude: -6.301486201275736,
+          longitude: 106.73522774610166,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }} style={{flex:1}} >
 
         <Marker 
         coordinate={{
-          latitude: 37.78825,
-          longitude: -122.4324
+          latitude: -6.301486201275736,
+          longitude: 106.73522774610166
         }}
         title="anjayy"
         description="anjayyyyyyy"
