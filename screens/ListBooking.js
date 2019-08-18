@@ -28,7 +28,7 @@ export default class ListBookingPage extends Component {
     super(props);
     this.state = { chosenDate: new Date() };
     this.setDate = this.setDate.bind(this);
-    this.previousPage = this.previousPage.bind(this)
+    this.backToHomePage = this.backToHomePage.bind(this)
   }
   setDate(newDate) {
     this.setState({ chosenDate: newDate });
@@ -39,9 +39,9 @@ export default class ListBookingPage extends Component {
   }
 
 
-  previousPage() {
-    const { goBack } = this.props.navigation;
-    goBack();
+  backToHomePage() {
+    const { navigate } = this.props.navigation;
+    navigate('explore');
   }
 
   render() {
@@ -50,7 +50,7 @@ export default class ListBookingPage extends Component {
          {/* HEADER */}
          <Header searchBar rounded style={{backgroundColor: '#0baa56', elevation: 0, borderBottomWidth: 0}} androidStatusBarColor="#0baa56">
           <Left style={{marginLeft: -10}}>
-            <Button style={{backgroundColor: '#0baa56', elevation: 0}} onPress={() => this.previousPage()}>
+            <Button style={{backgroundColor: '#0baa56', elevation: 0}} onPress={() => this.backToHomePage()}>
             <Icon style={{color: 'white'}} name="arrow-back" />
             </Button>
           </Left>

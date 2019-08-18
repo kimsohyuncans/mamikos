@@ -17,7 +17,8 @@ import { Container,
    Textarea,
    Radio,
    ListItem,
-
+	Footer,
+	FooterTab,
    } from 'native-base';
 
 import {View,TouchableOpacity,ScrollView,StyleSheet,Image} from 'react-native';
@@ -50,109 +51,52 @@ export default class AddAdvertisementPage extends Component {
     render() {
     return (
       <Container>
-        <Header style={styles.header}>
+        <Header style={styles.header}  androidStatusBarColor="#0baa56">
           <Left>
             <Button transparent>
               <Icon name='arrow-back' />
             </Button>
           </Left>
-          <Body>
-            <Title>Tambah Data Iklan</Title>
-          </Body>
+          <Item>
+            <Text style={{fontSize: 20, fontFamily: 'Lato-Semibold', color: 'white'}} numberOfLines={1}>Tambah Data Iklan</Text>
+			</Item>
           <Right>
-            <Button transparent>
-              <Text>TanyaCs</Text>
+            <Button style={{borderRadius: 10, height: 40, marginRight:5 , backgroundColor: '#0baa56', justifyContent: 'center', alignItems: 'center', borderRadius: 10, borderWidth: 1, borderColor: 'white'}}>
+              <Text  style={{fontSize: 15, fontFamily: 'Lato-Semibold', color: 'white'}} numberOfLines={1} uppercase={false}>Tanya CS</Text>
             </Button>
           </Right>
         </Header>
-
+		<ScrollView showsVerticalScrollIndicator={false}>
         <Content style={styles.content}>
-        	<ScrollView>
+        	
 
-        {/*Form Barang Dan Jasa*/}
-	        	<Form style={styles.form}>
-	        		<Label style={styles.label}>Judul Iklan</Label>
-	        		<Item >
-	        			<Input placeholder="Tulis judul sesuai barang atau jasa" onFocus={this.FocusChange}/>
+		{/*Form Barang Dan Jasa*/}
+				<View style={{marginLeft: 0}}>
+	        		
+					<Form style={styles.form}>
+					<View style={{marginLeft: 15}}>
+					<Label style={styles.label}>Judul Iklan</Label>
+					</View>
+	        		<Item  >
+	        			<Input  style={{marginLeft: -5}} placeholderTextColor="#bcbcbc" placeholder="Masukan judul iklan kost"/>
 	        		</Item>
-	        		<Label style={styles.label}>Harga Barang atau jasa</Label>
+					<View style={{marginLeft: 15}}>
+	        		<Label style={styles.label}>Harga Kost</Label>
+					</View>
 	        		<Item >
-	        			<Input placeholder="Tulis judul sesuai barang atau jasa"/>
+	        			<Input style={{marginLeft: -5}} placeholderTextColor="#bcbcbc"  placeholder="Masukan harga kost, misalnya: 80000"/>
 	        		</Item>
-	        			<Label style={styles.label}>Deskripsi barang atau jasa</Label>
-	        			<Textarea rowSpan={5} placeholder="Textarea" style={styles.textarea}/>
+						<View style={{marginLeft: 10}}>
+	        			<Label style={styles.label}>Deskripsi Kost</Label>
+						</View>
+	        			<Textarea rowSpan={3.5} placeholderTextColor="#bcbcbc"  placeholder="Masukan Deskripsi Kost, misalnya: Kost sudah termasuk kasur, dekat dengan Bootcamp Arkademy, listrik ditanggung lucinta " style={styles.textarea}/>
 
 
-	        			<Label>Kategori</Label>
-
-	        		{/* Radio Button*/}
-	        		<View style={styles.radiocontainer}>
-	        			
-	        			<View style={styles.RowContainer}>
-		        			<Radio selectedColor={'#0baa56'} selected={this.state.tombolradio.barang} onPress={ () => {
-		        				this.setState({
-		        					tombolradio : {
-		        						barang:true,
-		        						jasa:false,
-		        						baru:false,
-		        						bekas:true
-		        					}
-		        				})
-		        				}
-		        			}/>
-		        			<Text> barang </Text>		
-		       			</View>
-		       			<View style={styles.RowContainer}>
-		        			<Radio selectedColor={'#0baa56'} selected={this.state.tombolradio.jasa} onPress={() => {
-		        				this.setState({
-		        					tombolradio:{
-		        						barang:false,
-		        						jasa:true,
-		        						baru:false,
-		        						bekas:false
-		        					}
-		        				})
-		        			}}/>
-		        			<Text> Jasa </Text>		
-		       			</View>
-
-	          
-		       		</View>
-		       			<Label>Kondisi</Label>
-		       		<View style={styles.radiocontainer}>
-	        			
-	        			<View style={{flex:1,flexDirection:'row'}}>
-		        			<Radio selectedColor={'#0baa56'} selected={this.state.tombolradio.baru} onPress={() => {
-		        				this.setState({
-		        					tombolradio : {
-		        						barang:true,
-										jasa:false,
-										baru:true,
-										bekas:false
-									}
-		        				})
-		        			}}/>
-		        			<Text> baru </Text>		
-		       			</View>
-		       			<View style={{flex:1,flexDirection:'row'}}>
-		        			<Radio selectedColor={'#0baa56'} selected={this.state.tombolradio.bekas} onPress={() => {
-		        				this.setState({
-		        					barang:true,
-		        					jasa:false,
-		        					baru:false,
-		        					bekas:true
-		        				})
-		        			}}/>
-		        			<Text> bekas </Text>		
-		       			</View>
-
-	          
-		       		</View>
-		       		<Label>Lokasi Penjual Barang dan jasa </Label>
+		       		<Label style={{marginTop: 20, fontFamily: 'Lato-Semibold', fontSize: 20, marginLeft: 10}}>Lokasi Kost</Label>
 		       		<Item>
-		       			<Icon name='ios-search'/>
-		       			<Input placeholder="Search"/>
-		       			<Button success><Text>Ubah Lokasi </Text></Button>
+		       			<Icon style name='ios-search'/>
+		       			<Input style={{ fontFamily: 'Lato-Semibold', fontSize: 16}} placeholderTextColor="#bcbcbc" placeholder="Search"/>
+		       			<Button style={{borderRadius: 10, backgroundColor: '#0baa56', marginRight: -10}}><Text uppercase={false}>Ubah Lokasi </Text></Button>
 		       		</Item>
 
 
@@ -164,40 +108,45 @@ export default class AddAdvertisementPage extends Component {
 
 		       {/*Form detail penjual*/}
 		       <Form style={styles.form}>
+			       <View style={{marginLeft: 10}}>
 		       		<Label style={styles.label}>Tuliskan alamat lengkap penjual</Label>
+					</View>
 		       		<Item>
-		       			<Input placeholder="masukkan sepeti nama jalan , kelurahan,kecamatan,kota,dst" />
+		       			<Input rowSpan={4} style={{marginLeft: -10}} placeholderTextColor="#bcbcbc" placeholder="Masukan alamat misalnya: jalan, kecamatan, dll" />
 		       		</Item>
+					<View style={{marginLeft: 10}}>
 		       		<Label style={styles.label}>Masukkan Foto</Label>
 		       		
 
 		       		<TouchableOpacity onPress={() => alert('hello')} style={{width: 100,height: 100}}>
 
-		       			<Image source={require('../src/icon/addimage.png')} style={{width: '100%',height:'100%',resizeMode: 'contain'}}/>
+		       			<Image source={require('../src/icon/addimage.png')} style={{width: 138,height:110,resizeMode: 'contain',marginTop: 10, marginBottom: 20}}/>
 		       		</TouchableOpacity>
-
-		       		<Label style={styles.label}>Kontak yang bisa di hubungi</Label>
-		       		<Label>Nama</Label>
-		       		<Item>
-		       			<Input placeholder='tulis nama lengkap anda atau sapaan anda'/>
+					   <Label style={{fontFamily: 'Lato-Semibold', fontSize: 19, marginTop: 40}}>Nama Depan dan Belakang</Label>
+		       		<Item style={{ marginLeft: -5}}>
+		       			<Input  placeholderTextColor="#bcbcbc" placeholder='Masukan nama lengkap atau sapaan anda'/>
 		       		</Item>
-		       		<Label style={styles.label}>Nomor Telepon / HP</Label>
-		       		<Item floatingLabel style={{marginBottom: '20%'}}>
-		       			<Input/>
+					   <Label style={{fontFamily: 'Lato-Semibold', fontSize: 19, marginTop: 40}}>Nomor Telepon</Label>
+		       		<Item style={{ marginLeft: -5}}>
+		       			<Input  placeholderTextColor="#bcbcbc" placeholder='Masukan nomor telepon anda'/>
 		       		</Item>
+					</View>
+		       		
 
 
 		       </Form>
-		    </ScrollView>
-		   {/* button submit */}
+
+			   {/* KAKI */}
+			   <View style={{justifyContent: 'center', alignItems: 'center'}}>
+			   <Button style={{marginTop: 50, marginBottom: 50, justifyContent: 'center', alignItems: 'center', width: 300, backgroundColor: '#0baa56', borderRadius: 10}}><Text>Submit</Text></Button>
+			   </View>
 
 
+			   </View>
+
+		  
         </Content>
-        	<View style={{justifyContent: 'center',alignItems:'center'}}>
-		   		<Button onPress={()=>this.props.navigation.navigate('searchkost')} warning style={{width: '95%',justifyContent:'center'}}>
-		   			<Text>Submit</Text>
-		   		</Button>
-		   	</View>
+		</ScrollView>
         </Container>
     );
   }
@@ -208,17 +157,20 @@ const styles = StyleSheet.create({
 		backgroundColor: '#0baa56'
 	},
 	content:{
-		marginHorizontal: 10
+		marginHorizontal:20
 	},
 	form : {
-		width:'95%',
-		justifyContent:'center',
-		marginLeft: 10
+		marginLeft: -10,
+		width:'100%',
+		justifyContent:'center'
 	},
 	textarea : {
-		width:'90%',
+		width: "100%",
 		borderBottomWidth: 1,
-		borderBottomColor: 'green'
+		borderBottomColor: '#dbdbdb',
+		fontFamily: 'Lato-Semibold',
+		fontSize: 16,
+		marginLeft: 0
 	},
 
 	
@@ -237,10 +189,15 @@ const styles = StyleSheet.create({
 		height: 200,
 		width: '100%',
 		borderWidth: 1,
-		marginTop:20
+		marginTop:20,
+		borderColor: '#dbdbdb'
 	},
 	
 	label:{
-		marginTop: '15%'
+		marginTop: 20,
+		fontFamily: 'Lato-Semibold',
+		fontSize: 19,
+		marginLeft: 0
+
 	}
 })
