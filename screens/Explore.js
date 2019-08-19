@@ -138,6 +138,7 @@ export default class Explore extends Component {
                     sliderWidth={400}
                     itemWidth={300}
                     autoplay={true}
+                    contentContainerCustomStyle={{elevation: 10}}
                     enableMomentum={false}
                     lockScrollWhileSnapping={false}
                     loop={true}
@@ -232,7 +233,7 @@ export default class Explore extends Component {
             </Button>
             <Button vertical onPress={()=> this.props.navigation.navigate('profilePage')}>
               <Icon name="md-person" style={{color: '#9E9E9E'}} />
-              <Text style={{color: '#9E9E9E'}}>Profile</Text>
+              <Text style={{color: '#9E9E9E'}} >Profile</Text>
             </Button>
           </FooterTab>
         </Footer>

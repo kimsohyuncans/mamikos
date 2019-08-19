@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View , Image, Text,TextInput,StyleSheet,KeyboardAvoidingView,TouchableOpacity} from 'react-native';
+import {View , Image, Text,TextInput,StyleSheet,KeyboardAvoidingView,TouchableOpacity, StatusBar} from 'react-native';
 import { Container, Header, Left, Body, Right, Title,Button,Form,Item,Icon,Input,Label,ScrollView} from 'native-base';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
@@ -16,7 +16,7 @@ class RegisterPage extends Component {
     return (
       <KeyboardAwareScrollView>
         <View style={{flex:1,backgroundColor: 'white'}}>
-
+        <StatusBar backgroundColor="#119a51"/>
         
           
         <Image source={require('../src/img/register.png')} style={{width:'100%',height: 370}}/>

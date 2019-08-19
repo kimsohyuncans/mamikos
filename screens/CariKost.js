@@ -57,7 +57,7 @@ export default class CariKost extends Component {
           </Button>
         </Header>
 
-       <Tabs tabBarUnderlineStyle={{backgroundColor: '#0baa56'} } renderTabBar={()=> <ScrollableTab  style={{backgroundColor: 'white'}} />} style={{elevation: 0, borderTopWidth: 0, backgroundColor: '#0baa56'}}>
+       <Tabs tabBarUnderlineStyle={{backgroundColor: '#0baa56', height: 2}} renderTabBar={()=> <ScrollableTab  style={{backgroundColor: 'white'}} />} style={{elevation: 0, borderTopWidth: 0, backgroundColor: '#0baa56'}}>
           <Tab heading="Lihat Peta" tabStyle={{backgroundColor: 'white'}} activeTabStyle={{backgroundColor: 'white'}} activeTextStyle={{color: '#0ba56', fontFamily: 'Lato-Semibold'}} textStyle={{color: '#0baa56', fontFamily: 'Lato-Semibold'}} tabContainerStyle={{ borderTopWidth: 0}} >
             <LihatPeta />
           </Tab>

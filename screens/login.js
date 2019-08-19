@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View , Image, Text,TextInput,StyleSheet,TouchableOpacity,ScrollView} from 'react-native';
+import {View , Image, Text,TextInput,StyleSheet,TouchableOpacity,ScrollView, StatusBar} from 'react-native';
 import { Container, Header, Left, Body, Right, Title,Button,Form,Item,Icon,Input,Label} from 'native-base';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
@@ -19,7 +19,7 @@ class LoginPage extends Component {
       <KeyboardAwareScrollView>
       <ScrollView>
         <View style={{flex:1,backgroundColor: 'white'}} >
-
+        <StatusBar backgroundColor="#119a51"/>
         
           
           <Image source={require('../src/img/login.png')} style={{width:'100%',height: 370, elevation: 10}}/>
@@ -83,7 +83,10 @@ const styles = StyleSheet.create({
       borderBottomWidth: 1, 
     },
 
-    labelText : {color:'#a6a6a6'},
+    labelText : {
+      color:'#a6a6a6',
+      fontFamily: 'Lato-Regular'
+    },
 
     button : {
       width: '65%',
