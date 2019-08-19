@@ -2,14 +2,40 @@ import React, { Component } from 'react';
 import {View , Image, Text,TextInput,StyleSheet,KeyboardAvoidingView,TouchableOpacity} from 'react-native';
 import { Container, Header, Left, Body, Right, Title,Button,Form,Item,Icon,Input,Label,ScrollView} from 'native-base';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-
+import axios from 'axios'
 import AddAdvertisement from './add-iklan';
 
 class RegisterPage extends Component {
 
 
+  constructor(props){
+    super(props)
+
+    this.state = {
+      username : '',
+      password : '',
+    }
+
+    
+    this.register = this.register.bind(this)
+  }
+
   static navigationOptions = {
     header: null
+  }
+
+  // store data to database as users
+  register(){
+
+    const { username,password } = this.state
+    axios.post('http://localhost:1337/api/v1/regis',{
+      username : username,
+      password : password
+    }).then( (response) => {
+
+      response.data.status == "success" ? alert('Registration successfully completed! Thank you <3') : alert('ada kesalahan saat pendafataran')
+    }).catch( (error) => alert(error))
+
   }
 
   render() {
@@ -28,16 +54,18 @@ class RegisterPage extends Component {
 
                 <Item style={styles.item} floatingLabel>
                   <Label style={styles.labelText}>Username</Label>
-                  <Input />
+                  <Input
+                  onChangeText = {(e) => this.setState({username:e})} />
                 </Item>
                 <Item style={styles.item} floatingLabel>
                   <Label style={styles.labelText}>Password</Label>
-                  <Input secureTextEntry={true} />
+                  <Input
+                  onChangeText = {(e) => this.setState({password:e})} secureTextEntry={true} />
                 </Item>
               </Form>
               
 
-            <Button onPress={() => this.props.navigation.navigate('register')} style={styles.button}>
+            <Button onPress={() => this.register()} style={styles.button}>
                 <Text style={styles.loginText}>Register</Text>    
             </Button>
             <View style={{flexDirection: 'row'}}>
