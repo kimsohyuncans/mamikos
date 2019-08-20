@@ -23,8 +23,25 @@ export default class DetailPage extends Component {
     header: null
   }
 
+  constructor(props) {
+    super(props);
+    this.state = {};
 
-  goBack = () => this.props.navigation.goBack();
+    this.nextPage = this.nextPage.bind(this);
+    this.previousPage = this.previousPage.bind(this)
+}
+
+  nextPage(destination) {
+    const { navigate } = this.props.navigation; 
+    navigate(destination);
+  };
+
+  previousPage() {
+    const { goBack } = this.props.navigation;
+    goBack();
+  }
+
+
 
   render() {
 
@@ -34,7 +51,7 @@ export default class DetailPage extends Component {
         {/* HEADER */}
         <Header style={styles.bgwhite} androidStatusBarColor='#0baa56'>
           <Left style={styles.headermarginl}>
-            <Button style={styles.buttonheader} onPress={this.goBack}>
+            <Button style={styles.buttonheader} onPress={this.previousPage}>
               <Icon style={styles.headericon} name="arrow-back" />
             </Button>
           </Left>
@@ -173,7 +190,7 @@ export default class DetailPage extends Component {
            {/* KOS MENARIK */}
            <View style={{backgroundColor: 'white', height: 260, marginHorizontal: 20, marginTop: 30}}>
             <Text style={{color: 'black', fontFamily: 'Lato-Semibold', fontSize: 20}}>
-              Kos Menarik Lainnyaa
+              Kos Menarik Lainnyaa  
             </Text>
               {/* GARIS GRAY */}
             <View style={{backgroundColor: '#dbdbdb', height: 1, marginTop: 5}}/>
@@ -184,7 +201,7 @@ export default class DetailPage extends Component {
                   <View style={{flexDirection: 'row'}}>
 
                     {/* LOOP HERE */}
-                    <View style={{flex: 0.8, backgroundColor: 'white', marginLeft: 10, height: 180, width: 180, marginTop: 10, borderRadius: 5}}>
+                    <View style={{flex: 0.8, backgroundColor: 'white', marginLeft: 0, height: 180, width: 180, marginTop: 10, borderRadius: 5}}>
                       <View style={{backgroundColor: 'white', height: 30}}>
                         <Button style={{width: 180, height: 30, borderRadius: 5, backgroundColor: 'white', borderColor: '#0baa56', justifyContent: 'center', alignItems: 'center', borderWidth: 1}}>
                           <Text style={{color: '#0baa56', fontFamily: 'Lato-Regular'}}>Ada 10 Kamar</Text>
@@ -290,7 +307,7 @@ export default class DetailPage extends Component {
                   Hubungi Kost
                 </Text>
               </Button>
-              <Button onPress={this.handleClick} style={{borderRadius: 10, height: 40, width: '50%', backgroundColor: '#ec7e2f', justifyContent: 'center', alignItems: 'center'}}>
+              <Button onPress={() => this.nextPage('booking')} style={{borderRadius: 10, height: 40, width: '50%', backgroundColor: '#ec7e2f', justifyContent: 'center', alignItems: 'center'}}>
                 <Text style={{color: 'white', fontSize: 14, fontFamily: 'Lato-Semibold', textAlign: 'center'}} uppercase={false}>
                   Booking
                 </Text>

@@ -2,16 +2,50 @@ import React, { Component } from 'react';
 import {View , Image, Text,TextInput,StyleSheet,TouchableOpacity,ScrollView, StatusBar} from 'react-native';
 import { Container, Header, Left, Body, Right, Title,Button,Form,Item,Icon,Input,Label} from 'native-base';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import axios from 'axios'
 
 import AddAdvertisement from './add-iklan';
 import RegisterPage from './register'
 
 class LoginPage extends Component {
 
+  constructor(props){
+    super(props)
+
+    this.state = {
+      username : '',
+      password : '',
+    }
+
+    this.login = this.login.bind(this)
+    
+  }
 
   static navigationOptions = {
     header: null
   }
+
+  login(){
+
+    const {username,password} = this.state
+    const {navigate} = this.props.navigation
+    
+    
+    // send request if user exist
+    axios.post("http://localhost:1337/api/v1/login",{
+      username : username,
+      password : password,
+
+    }).then( (response) => {
+      
+      response.data.status == "ok" ? navigate('explore') : alert('Sorry, Wrong password!')
+
+    }).catch( (error) => {
+      alert(error)
+    })
+
+  }
+
 
   render() {
     return (
@@ -22,7 +56,7 @@ class LoginPage extends Component {
         <StatusBar backgroundColor="#119a51"/>
         
           
-          <Image source={require('../src/img/login.png')} style={{width:'100%',height: 370, elevation: 10}}/>
+          <Image source={require('../src/img/login.png')} style={{width:'100%',height: 370}}/>
           <View style= {styles.container} >
             {/*Input Login*/}
 
@@ -31,18 +65,21 @@ class LoginPage extends Component {
 
                 <Item style={styles.item} floatingLabel>
                   <Label style={styles.labelText}>Username</Label>
-                  <Input />
+                  <Input
+                  onChangeText = {(e) => this.setState({username:e})} />
                 </Item>
                 
                 <Item style={styles.item} floatingLabel>
                 <Label style={styles.labelText} >Password</Label>
-                  <Input secureTextEntry={true} />
+                  <Input
+                    onChangeText = { (e) => this.setState({password:e}) }
+                    secureTextEntry={true} />
                 </Item>
               </Form>
             
 
-            <Button onPress={() => this.props.navigation.navigate('Home')} style={styles.button}>
-                <Text style={styles.loginText}>{"Login"}</Text>    
+            <Button onPress={() => this.login()} style={styles.button}>
+                <Text style={styles.loginText}>Login</Text>    
             </Button>
             <View style={{flexDirection: 'row',marginBottom: 20}}>
               <Text style={styles.policy2}> Don't have an account ? </Text>

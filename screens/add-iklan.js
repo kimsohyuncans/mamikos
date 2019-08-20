@@ -32,19 +32,17 @@ export default class AddAdvertisementPage extends Component {
     header: null
   }
 
-	constructor(){
-		super();
+	constructor(props){
+		super(props);
 
-		this.state = {
-			tombolradio : {
-				barang:false,
-				jasa:false,
-				bekas:false,
-				baru:false,
-				
-			},
-		}
+		
 	}
+
+	previousPage(){
+		const { goBack } = this.props.navigation
+		goBack()
+	}
+
 
 
 
@@ -53,7 +51,7 @@ export default class AddAdvertisementPage extends Component {
       <Container>
         <Header style={styles.header}  androidStatusBarColor="#0baa56">
           <Left>
-            <Button transparent>
+            <Button transparent onPress={ () => this.previousPage()}>
               <Icon name='arrow-back' />
             </Button>
           </Left>
@@ -94,7 +92,7 @@ export default class AddAdvertisementPage extends Component {
 
 		       		<Label style={{marginTop: 20, fontFamily: 'Lato-Semibold', fontSize: 20, marginLeft: 10}}>Lokasi Kost</Label>
 		       		<Item style={{borderBottomColor: '#0baa56'}}>
-		       			<Icon style name='ios-search'/>
+		       			<Icon name='ios-search'/>
 		       			<Input style={{ fontFamily: 'Lato-Semibold', fontSize: 16}} placeholderTextColor="#bcbcbc" placeholder="Search"/>
 		       			<Button onPress={() => alert('coming soon')} style={{borderRadius: 10, backgroundColor: '#0baa56', marginRight: -10}}><Text uppercase={false}>Ubah Lokasi </Text></Button>
 		       		</Item>
@@ -120,7 +118,7 @@ export default class AddAdvertisementPage extends Component {
 
 		       		<TouchableOpacity onPress={() => alert('coming soon')} style={{width: 100,height: 100}}>
 
-		       			<Image source={require('../src/icon/addimage.png')} style={{width: 138,height:110,resizeMode: 'contain',marginTop: 10, marginBottom: 20}}/>
+		       			<Image source={require('../src/icon/addimage.png')} style={{width: 138,height:110,resizeMode: 'contain',marginTop: 10, marginBottom: 20}}></Image>
 		       		</TouchableOpacity>
 					   <Label style={{fontFamily: 'Lato-Semibold', fontSize: 19, marginTop: 40}}>Nama Depan dan Belakang</Label>
 		       		<Item style={{ marginLeft: -5, borderBottomColor: '#0baa56'}}>

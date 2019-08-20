@@ -28,12 +28,15 @@ export default class Map extends Component{
           latitude: -6.301486201275736,
           longitude: 106.73522774610166
         }}
-        title="anjayy"
-        description="anjayyyyyyy"
+        title="Mampikos Maps"
+        description="Mencari lokasi kos terdekat dari sini"
+        showsUserLocation={true}
+        showsCompass={true}
+        showsTraffic={true}
         draggable
-        onDragEnd={(e) => alert(e.nativeEvent.coordinate)}>
+        onDragEnd={(e) => alert(e)}>
 
-          <Image source={require('../src/icon/pin3.png')} style={{height: 50,width: 50,resizeMode:'contain'}} />
+          <Image source={require('../src/icon/pin3.png')} style={{height: 55,width: 50,resizeMode:'stretch'}} />
 
         </Marker>
 

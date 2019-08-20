@@ -3,9 +3,19 @@ import {View,Text,Image, StatusBar} from 'react-native';
 import {Container , Header,TouchableOpacity, Left,Thumbnail,Button,Card,CardItem,Body,Content,List,ListItem,Title,Icon, Footer, FooterTab, Fab, Form} from 'native-base';
 export default class ProfilePage extends Component{
 
+	constructor(props){
+		super(props);
+
+		this.changePage = this.changePage.bind(this)
+	}
 	static navigationOptions = {
     	header: null
- 	 }
+	  }
+	  
+	  changePage(to){
+		  const { navigate } = this.props.navigation
+		  navigate(to)
+	  }
 
 	render(){
 		return(
@@ -107,19 +117,19 @@ export default class ProfilePage extends Component{
 				<View>
 					<Footer style={{backgroundColor: 'white', borderColor: '#f2f2f2', borderWidth: 1}}>
 					<FooterTab style={{backgroundColor: 'white'}}>
-					<Button vertical>
+					<Button vertical onPress={ () => this.changePage('explore')}>
 					<Icon name="md-home" style={{color: '#9E9E9E'}} />
 					<Text style={{color: '#9E9E9E', fontFamily: 'Lato-Semibold', fontSize: 11}}>EXPLORE</Text>
 					</Button>
-					<Button vertical>
+					<Button vertical onPress={ () => this.changePage('searchkost')}>
 					<Icon name="md-search" style={{color: '#9E9E9E'}} />
 					<Text style={{color: '#9E9E9E', fontFamily: 'Lato-Semibold', fontSize: 11}}>SEARCH</Text>
 					</Button>
-					<Button vertical>
+					<Button vertical onPress={ () => this.changePage('listbooking')}>
 					<Icon name="md-calendar" style={{color: '#9E9E9E'}} />
 					<Text style={{color: '#9E9E9E', fontFamily: 'Lato-Semibold', fontSize: 11}}>BOOKING</Text>
 					</Button>
-					<Button vertical>
+					<Button vertical onPress={ () => this.changePage('profilePage')}>
 					<Icon name="md-person" style={{color: '#0baa56'}} />
 					<Text style={{color: '#0baa56', fontFamily: 'Lato-Semibold', fontSize: 11}}>PROFILE</Text>
 					</Button>

@@ -17,9 +17,11 @@ import LoginPage from './screens/login'
 import AddAdvertisementPage from './screens/add-iklan'
 import RegisterPage from './screens/register'
 import Explore from './screens/Explore'
-import CariKost from './screens/CariKost'
+import SearchKostPage from './screens/CariKost'
 import DetailPage from './screens/DetailKost'
 import ProfilePage from './screens/profile'
+import BookingPage from './screens/Booking'
+import ListBookingPage from './screens/ListBooking'
 
 
 
@@ -40,11 +42,19 @@ const HomeStack = createStackNavigator({
 	},
 
 	searchkost : {
-		screen : CariKost
+		screen : SearchKostPage
 	},
 
 	detailkost :  {
 		screen : DetailPage
+	},
+
+	booking : {
+		screen : BookingPage
+	},
+
+	listbooking : {
+		screen : ListBookingPage
 	},
 
 	addadvertisement : {

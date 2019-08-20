@@ -23,22 +23,34 @@ import { Container,
        } from 'native-base';
  import { CheckBox } from 'react-native-elements'
        
-export default class DatePickerExample extends Component {
+export default class ListBookingPage extends Component {
   constructor(props) {
     super(props);
     this.state = { chosenDate: new Date() };
     this.setDate = this.setDate.bind(this);
+    this.backToHomePage = this.backToHomePage.bind(this)
   }
   setDate(newDate) {
     this.setState({ chosenDate: newDate });
   }
+
+  static navigationOptions = {
+    header: null
+  }
+
+
+  backToHomePage() {
+    const { navigate } = this.props.navigation;
+    navigate('explore');
+  }
+
   render() {
     return (
       <Container>
          {/* HEADER */}
          <Header searchBar rounded style={{backgroundColor: '#0baa56', elevation: 0, borderBottomWidth: 0}} androidStatusBarColor="#0baa56">
           <Left style={{marginLeft: -10}}>
-            <Button style={{backgroundColor: '#0baa56', elevation: 0}}>
+            <Button style={{backgroundColor: '#0baa56', elevation: 0}} onPress={() => this.backToHomePage()}>
             <Icon style={{color: 'white'}} name="arrow-back" />
             </Button>
           </Left>
@@ -54,7 +66,7 @@ export default class DatePickerExample extends Component {
           {/* LIST BOOKING */}
           <View style={{backgroundColor: 'white', height: 190}}> 
             <View elevation={10} style={styles.Shadowbox} style={{marginHorizontal: 20, backgroundColor: 'white', height: 150, marginTop: 20, borderRadius: 10, flexDirection: 'row'}}>
-            <Image source={require('./img/list/kost1.jpg')} style={{width: "100%", height: '100%', resizeMode: "cover", flex: 1, borderRadius: 10}}/>
+            <Image source={require('../src/img/list/kost1.jpg')} style={{width: "100%", height: '100%', resizeMode: "cover", flex: 1, borderRadius: 10}}/>
               <View style={{backgroundColor: 'white', flex: 2.2, borderRadius: 10, flexDirection: 'column'}}>
                 <View style={{backgroundColor: 'white', flex: 1, borderRadius: 10}}>
                 <Text ellipsizeMode='tail' numberOfLines={1}  style={{fontFamily: 'Lato-Bold', marginTop: 20, marginLeft: 10, fontSize: 14}}>
@@ -93,7 +105,7 @@ export default class DatePickerExample extends Component {
          {/* LIST BOOKING */}
          <View style={{backgroundColor: 'white', height: 190}}> 
             <View elevation={10} style={{marginHorizontal: 20, backgroundColor: 'white', height: 150, marginTop: 20, borderRadius: 10, flexDirection: 'row'}}>
-            <Image source={require('./img/list/kost2.jpg')} style={{width: "100%", height: '100%', resizeMode: "cover", flex: 1, borderRadius: 10}}/>
+            <Image source={require('../src/img/list/kost2.jpg')} style={{width: "100%", height: '100%', resizeMode: "cover", flex: 1, borderRadius: 10}}/>
               <View style={{backgroundColor: 'white', flex: 2.2, borderRadius: 10, flexDirection: 'column'}}>
                 <View style={{backgroundColor: 'white', flex: 1, borderRadius: 10}}>
                 <Text ellipsizeMode='tail' numberOfLines={1}  style={{fontFamily: 'Lato-Bold', marginTop: 20, marginLeft: 10, fontSize: 14}}>

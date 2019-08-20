@@ -26,7 +26,7 @@ export default class Explore extends Component {
     header: null
   }
 
-  handleClick(){alert('Button clicked!');}
+  
 
   get pagination () {
     const { entries, activeSlide } = this.state;
@@ -138,7 +138,6 @@ export default class Explore extends Component {
                     sliderWidth={400}
                     itemWidth={300}
                     autoplay={true}
-                    contentContainerCustomStyle={{elevation: 10}}
                     enableMomentum={false}
                     lockScrollWhileSnapping={false}
                     loop={true}
@@ -228,7 +227,7 @@ export default class Explore extends Component {
             </Button>
             </TouchableOpacity>
             <Button vertical>
-              <Icon name="md-calendar" style={{color: '#9E9E9E'}} />
+              <Icon name="md-calendar" style={{color: '#9E9E9E'}} onPress={() => this.props.navigation.navigate('listbooking')} />
               <Text style={{color: '#9E9E9E'}}>Booking</Text>
             </Button>
             <Button vertical onPress={()=> this.props.navigation.navigate('profilePage')}>
@@ -253,7 +252,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.29,
     shadowRadius: 4.65,
 
-    elevation: 7,
   },
   
   showhorizontal : { 
