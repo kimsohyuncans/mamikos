@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View , Image, Text,TextInput,StyleSheet,TouchableOpacity,ScrollView, StatusBar} from 'react-native';
+import {View , Image, Text,TextInput,StyleSheet,TouchableOpacity,ScrollView, StatusBar,AsyncStorage} from 'react-native';
 import { Container, Header, Left, Body, Right, Title,Button,Form,Item,Icon,Input,Label} from 'native-base';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import axios from 'axios'
@@ -11,11 +11,17 @@ class LoginPage extends Component {
 
   constructor(props){
     super(props)
-
+    AsyncStorage.getItem('token').then((res) => {
+      if(res != null ){
+        this.props.navigation.navigate('explore')
+      }
+    })
     this.state = {
       username : '',
       password : '',
     }
+
+    
 
     this.login = this.login.bind(this)
     
@@ -24,6 +30,8 @@ class LoginPage extends Component {
   static navigationOptions = {
     header: null
   }
+
+  
 
   login(){
 
@@ -38,7 +46,12 @@ class LoginPage extends Component {
 
     }).then( (response) => {
       
-      response.data.status == "ok" ? navigate('explore') : alert('Sorry, Wrong password!')
+      if(response.data.status == "success"){
+        AsyncStorage.setItem('token',response.data.token).then(str => alert('token save')).catch(err => alert(err))
+        navigate('explore')
+      }else{
+        alert(response.data.msg)
+      }
 
     }).catch( (error) => {
       alert(error)

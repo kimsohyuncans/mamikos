@@ -1,5 +1,5 @@
 import React , {Component} from 'react';
-import {View,Text,Image, StatusBar} from 'react-native';
+import {View,Text,Image, StatusBar,AsyncStorage} from 'react-native';
 import {Container , Header,TouchableOpacity, Left,Thumbnail,Button,Card,CardItem,Body,Content,List,ListItem,Title,Icon, Footer, FooterTab, Fab, Form} from 'native-base';
 export default class ProfilePage extends Component{
 
@@ -17,11 +17,32 @@ export default class ProfilePage extends Component{
 		  navigate(to)
 	  }
 
+	  async getToken(key){
+		  token = await AsyncStorage.getItem('token')
+		  alert(token)
+	  }
+
+	  async removeItemValue(key) {
+		try {
+	
+			alert('sukses')
+			await AsyncStorage.removeItem(key)
+			this.props.navigation.navigate('login')
+			  
+		  
+		  return true;
+		  
+		}
+		catch(exception) {
+		  return false;
+		}
+	  }
+
 	render(){
 		return(
 			
 			<View style={{flex:1,backgroundColor: '#f2f2f2'}} >
-<StatusBar backgroundColor="#0baa56"></StatusBar>
+				<StatusBar backgroundColor="#0baa56"></StatusBar>
 				<View style={{height:180,borderBottomRightRadius: 80,borderBottomLeftRadius: 80, zIndex:0,backgroundColor: '#0baa55',alignItems: 'center'}}>
 					
 
@@ -71,7 +92,7 @@ export default class ProfilePage extends Component{
 			{/*  List Card */}
 				<View style={{marginTop:'12%',backgroundColor: '#f2f2f2',flex:1,alignItems:'center'}}>
 					<Card style={{marginTop:10,elevation:0, width:'95%'}}>
-						<CardItem header button onPress={() => alert('wow')}>
+						<CardItem header button onPress={() => this.getToken()}>
 							<Image source={require('../src/img/historyl.png')} resizeMode='contain' style={{width:25,height:25}}/>
 							<Text style={{marginLeft:10, fontFamily: 'Lato-Regular', fontSize: 15}}> History Booking </Text>
 						</CardItem>
@@ -103,7 +124,7 @@ export default class ProfilePage extends Component{
 							<Image source={require('../src/img/hubungics.png')} resizeMode='contain' style={{width:25,height:25}}/>
 							<Text style={{marginLeft:10, fontFamily: 'Lato-Regular', fontSize: 15}}> Hubungi CS </Text>
 						</CardItem>
-						<CardItem header button onPress={() => alert('wow')}>
+						<CardItem header button onPress={() => this.removeItemValue('token')}>
 							<Image source={require('../src/img/syarat.png')} resizeMode='contain' style={{width:25,height:25}}/>
 							<Text style={{marginLeft:10, fontFamily: 'Lato-Regular', fontSize: 15}}> Syarat dan Ketentuan </Text>
 						</CardItem>

@@ -3,7 +3,8 @@ import { Image,
         View, 
         ScrollView,
         StyleSheet,
-        TouchableOpacity
+        TouchableOpacity,
+        FlatList
         } from 'react-native';         
 
      
@@ -19,10 +20,12 @@ import { Container,
         Tab, 
         Tabs, 
         ScrollableTab,
-        TabHeading
+        TabHeading,
+        Spinner
     } from 'native-base';
 
 import Map from './map'   
+import Axios from 'axios';
 
 export default class CariKost extends Component {
     constructor(props)
@@ -83,154 +86,114 @@ class LihatPeta extends Component {
 class SearchKostPage extends Component {
     constructor(props){
         super(props)
+        this.state = {
+            listkost : undefined,
+            loading : true
+        }
     }
 
-    handleNavigateDetail() {
-        this.props.okeoce.navigate('detailkost')
+    
+
+    componentWillMount(){
+        Axios.get("http://localhost:1337/api/v1/listkost")
+        .then(response => {
+            this.setState({
+                listkost : response.data
+            });
+
+            this.setState({
+                loading:false
+            })
+        })
+        .catch(err => alert(err))
     }
+
+    // handleNavigateDetail(e) {
+    //     this.props.okeoce.navigate('detailkost',{
+    //         title : e.title
+    //     })
+    // }
 
     render(){
-        return(
-            <Container>
-                <ScrollView vertical showsVerticalScrollIndicator={false}>
-                    <Content>
+        if(this.state.loading == false){
+            return(
+                <Container>
+                    <ScrollView vertical showsVerticalScrollIndicator={false}>
+                        <Content>
+                            <FlatList
+                            data = {this.state.listkost}
+                            renderItem ={ ( {item} ) => (
+                                
+                                <TouchableOpacity  onPress={() => {
+                                    this.props.okeoce.navigate('detailkost',  item )}} >
+                                    <View style={{backgroundColor: 'white', height: 320, marginTop: 20, marginHorizontal: 10}}>
+                                        <View style={{ justifyContent: 'center', alignItems: 'center'}}>
+                                            <Image source={require('../src/img/list/kost1.jpg')} style={{ width: 330, height: 200, borderRadius: 5, marginHorizontal: 0}}></Image>
+                                        </View>
+                                        <View style={{flexDirection: 'row', marginTop: 5}}>
+                                            <Text style={{color: '#4A92E6', marginLeft: 25}}>
+                                                {item.gender}
+                                            </Text>
+                                            <Text style={{color: 'gray', marginLeft: 10}}>
+                                            {'\u2022'}
+                                            </Text>
+                                            <Text style={{color: '#1BAA56', marginLeft: 10}}>
+                                                Ada {item.availablerooms} kamar
+                                            </Text>
+                                            <Text style={{color: 'gray', marginLeft: 10}}>
+                                            {'\u2022'}
+                                            </Text>
+                                            <Text style={{color: '#3B445B', marginLeft: 10}}>
+                                                {item.city}
+                                            </Text>
+                                        </View>
+                                        <View style={{flexDirection: 'row', marginTop: 3}}>
+                                            <Text style={{color: '#2E2D39', marginLeft: 25}}>
+                                                Rp {item.price} / bulan
+                                            </Text>
+                                        </View>
+                                        <View style={{flexDirection: 'row', marginTop: 3}}>
+                                            <Text style={{color: '#383746', marginLeft: 25}}>
+                                                {item.title}
+                                            </Text>
+                                        </View>
+                                        <View style={{flexDirection: 'row', marginTop: 5}}>
+                                    
+                                        <Button disabled={true} style={{borderRadius: 10, marginLeft: 25, height: 30, backgroundColor: '#0BAA56', justifyContent: 'center', alignItems: 'center'}}>
+                                            <Text style={{color: 'white', fontSize: 15, fontFamily: 'Lato-Regular', justifyContent: 'center', alignItems: 'center'}} uppercase={false}>
+                                                Bisa Booking
+                                            </Text>
+                                        </Button>
+                                        </View>
+                                    </View>
+                                </TouchableOpacity>
 
-                    <TouchableOpacity  onPress={() => this.handleNavigateDetail()} >
-                        <View style={{backgroundColor: 'white', height: 320, marginTop: 20, marginHorizontal: 10}}>
-                            <View style={{ justifyContent: 'center', alignItems: 'center'}}>
-                                <Image source={require('../src/img/list/kost1.jpg')} style={{ width: 330, height: 200, borderRadius: 5, marginHorizontal: 0}}></Image>
-                            </View>
-                            <View style={{flexDirection: 'row', marginTop: 5}}>
-                                <Text style={{color: '#4A92E6', marginLeft: 25}}>
-                                    Putra
-                                </Text>
-                                <Text style={{color: 'gray', marginLeft: 10}}>
-                                {'\u2022'}
-                                </Text>
-                                <Text style={{color: '#1BAA56', marginLeft: 10}}>
-                                    Ada 20 kamar
-                                </Text>
-                                <Text style={{color: 'gray', marginLeft: 10}}>
-                                {'\u2022'}
-                                </Text>
-                                <Text style={{color: '#3B445B', marginLeft: 10}}>
-                                    Bintaro
-                                </Text>
-                            </View>
-                            <View style={{flexDirection: 'row', marginTop: 3}}>
-                                <Text style={{color: '#2E2D39', marginLeft: 25}}>
-                                    Rp 800.000 / bulan
-                                </Text>
-                            </View>
-                            <View style={{flexDirection: 'row', marginTop: 3}}>
-                                <Text style={{color: '#383746', marginLeft: 25}}>
-                                    Kost Bootcamp Arkademy Putra Tipe A
-                                </Text>
-                            </View>
-                            <View style={{flexDirection: 'row', marginTop: 5}}>
-                           
-                            <Button disabled={true} style={{borderRadius: 10, marginLeft: 25, height: 30, backgroundColor: '#0BAA56', justifyContent: 'center', alignItems: 'center'}}>
-                                <Text style={{color: 'white', fontSize: 15, fontFamily: 'Lato-Regular', justifyContent: 'center', alignItems: 'center'}} uppercase={false}>
-                                    Bisa Booking
-                                </Text>
-                            </Button>
-                            </View>
-                        </View>
-                    </TouchableOpacity>
-
-                    <View style={{backgroundColor: 'white', height: 320, marginTop: 20, marginHorizontal: 10}}>
-                        <View style={{ justifyContent: 'center', alignItems: 'center'}}>
-                            <Image source={require('../src/img/list/kost2.jpg')} style={{ width: 330, height: 200, borderRadius: 5, marginHorizontal: 10}}></Image>
-                        </View>
-                        <View style={{flexDirection: 'row', marginTop: 5}}>
-                            <Text style={{color: '#FF5492', marginLeft: 25}}>
-                                Putri
-                            </Text>
-                            <Text style={{color: 'gray', marginLeft: 10}}>
-                            {'\u2022'}
-                            </Text>
-                            <Text style={{color: '#ec7e2f', marginLeft: 10}}>
-                                Kamar penuh
-                            </Text>
-                            <Text style={{color: 'gray', marginLeft: 10}}>
-                            {'\u2022'}
-                            </Text>
-                            <Text style={{color: '#3B445B', marginLeft: 10}}>
-                                Jakarta Selatan
-                            </Text>
-                        </View>
-                        <View style={{flexDirection: 'row', marginTop: 3}}>
-                            <Text style={{color: '#2E2D39', marginLeft: 25}}>
-                                Rp 800.000 / bulan
-                            </Text>
-                        </View>
-                        <View style={{flexDirection: 'row', marginTop: 3}}>
-                            <Text style={{color: '#383746', marginLeft: 25}}>
-                                Kost Bootcamp Arkademy Putri Tipe A
-                            </Text>
-                        </View>
-                        <View style={{flexDirection: 'row', marginTop: 5}}>
-                       
-                        <Button disabled={true} style={{borderRadius: 10, marginLeft: 25, height: 30, backgroundColor: '#ec7e2f', justifyContent: 'center', alignItems: 'center'}}>
-                            <Text style={{color: 'white', fontSize: 15, fontFamily: 'Lato-Regular', justifyContent: 'center', alignItems: 'center'}} uppercase={false}>
-                                Penuh
-                            </Text>
-                        </Button>
-                        </View>
-                    </View>
-
-                    <View style={{backgroundColor: 'white', height: 320, marginTop: 20, marginHorizontal: 10}}>
-                        <View style={{ justifyContent: 'center', alignItems: 'center'}}>
-                            <Image source={require('../src/img/list/kost3.jpg')} style={{ width: 330, height: 200, borderRadius: 5, marginHorizontal: 10}}></Image>
-                        </View>
-                        <View style={{flexDirection: 'row', marginTop: 5}}>
-                            <Text style={{color: '#4A92E6', marginLeft: 25}}>
-                                Putra
-                            </Text>
-                            <Text style={{color: 'gray', marginLeft: 10}}>
-                            {'\u2022'}
-                            </Text>
-                            <Text style={{color: '#1BAA56', marginLeft: 10}}>
-                                Ada 20 kamar
-                            </Text>
-                            <Text style={{color: 'gray', marginLeft: 10}}>
-                            {'\u2022'}
-                            </Text>
-                            <Text style={{color: '#3B445B', marginLeft: 10}}>
-                                Bintaro
-                            </Text>
-                        </View>
-                        <View style={{flexDirection: 'row', marginTop: 3}}>
-                            <Text style={{color: '#2E2D39', marginLeft: 25}}>
-                                Rp 800.000 / bulan
-                            </Text>
-                        </View>
-                        <View style={{flexDirection: 'row', marginTop: 3}}>
-                            <Text style={{color: '#383746', marginLeft: 25}}>
-                                Kost Bootcamp Arkademy Putra Tipe A
-                            </Text>
-                        </View>
-                        <View style={{flexDirection: 'row', marginTop: 5}}>
-                       
-                        <Button disabled={true} style={{borderRadius: 10, marginLeft: 25, height: 30, backgroundColor: '#0BAA56', justifyContent: 'center', alignItems: 'center'}}>
-                            <Text style={{color: 'white', fontSize: 15, fontFamily: 'Lato-Regular', justifyContent: 'center', alignItems: 'center'}} uppercase={false}>
-                                Bisa Booking
-                            </Text>
-                        </Button>
-                        </View>
-                    </View>
-                    </Content>
-                </ScrollView>
+                            )}/>  
+                        
+    
+                        
+                        </Content>
+                    </ScrollView>
+                    
+                {/* FILTER */}
                 
-            {/* FILTER */}
-            
-                <View>
-                <Image source={require('../src/img/filterra.png')} style={{ width: 260, height: 65, borderRadius: 5, bottom: 0, resizeMode:'contain', position: 'absolute', justifyContent: 'center', alignSelf: 'center', alignItems: 'center', marginBottom: 30}}></Image>
-                </View>
-           
-
-            </Container>
-        )
+                    <View>
+                    <Image source={require('../src/img/filterra.png')} style={{ width: 260, height: 65, borderRadius: 5, bottom: 0, resizeMode:'contain', position: 'absolute', justifyContent: 'center', alignSelf: 'center', alignItems: 'center', marginBottom: 30}}></Image>
+                    </View>
+               
+    
+                </Container>
+            )
+        }else{
+            return(
+                <Container>
+                    <Content>
+                        <Spinner />
+                    </Content>
+                </Container>
+            )
+        }
+        
     }
 }
 

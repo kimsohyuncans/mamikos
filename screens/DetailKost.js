@@ -31,9 +31,9 @@ export default class DetailPage extends Component {
     this.previousPage = this.previousPage.bind(this)
 }
 
-  nextPage(destination) {
+  nextPage(destination,senddata) {
     const { navigate } = this.props.navigation; 
-    navigate(destination);
+    navigate(destination,senddata);
   };
 
   previousPage() {
@@ -43,8 +43,11 @@ export default class DetailPage extends Component {
 
 
 
+
   render() {
 
+    const { params } = this.props.navigation.state;
+    const { title,price,description,photos,city,seller,gender,contact,availablerooms,large,facility,create_by } = params;
     return (
       <Container>
 
@@ -98,23 +101,23 @@ export default class DetailPage extends Component {
         <View style={{backgroundColor: 'white', height: 120}}>
            <View style={{flexDirection: 'row',marginTop: 10}}>
             <Text style={{color: '#4A92E6', marginLeft: 20, fontFamily: 'Lato-Regular', fontSize: 19}}>
-              Putra
+              {gender}
             </Text>
             <Text style={{color: 'gray', marginLeft: 10}}>
               {'\u2022'}
             </Text>
             <Text style={{color: '#ec7e2f', marginLeft: 10, fontFamily: 'Lato-Regular', fontSize: 18}}>
-              Kamar penuh
+              {availablerooms} Kamar
             </Text>
             </View>
             <View style={{flexDirection: 'row',marginTop: 5}}>
               <Text style={{color: 'black', marginLeft: 20, fontFamily: 'Lato-Semibold', fontSize: 21}}>
-                Kost Arkademy Bintaro
+                {title}
               </Text>       
             </View>
             <View style={{flexDirection: 'row',marginTop: 5}}>
               <Text style={{color: 'black', marginLeft: 20, fontFamily: 'Lato-Semibold', fontSize: 21}}>
-                Bintaro Tangerang
+                {city}
               </Text>       
             </View>
           </View>
@@ -153,7 +156,7 @@ export default class DetailPage extends Component {
             <View style={{flexDirection: 'row', marginTop: 10, marginLeft: 20}}>
             <Icon style={styles.headericon} name="md-expand" />
             <Text style={{color: 'black', marginLeft: 10, fontFamily: 'Lato-Regular', fontSize: 18}}>
-                3x4 m
+                {large} m
             </Text>
             </View>
             </View>
@@ -177,11 +180,11 @@ export default class DetailPage extends Component {
               {/* DESKRIPSI KOST */}
               <View>
                 <Text style={{color: 'black', marginTop: 20, marginLeft: 20, fontFamily: 'Lato-Semibold', fontSize: 20}}>
-                    Deskripsi kost
+                    Deskripsi Kost
                 </Text>
               <View style={{flexDirection: 'row', marginTop: 10, marginHorizontal: 20, flexWrap: 'wrap'}}>
                 <Text>
-                  Kos yang sangat nyaman gak bikin kembung, sangat berdekatan dengan warteg dan hanya lima menit ke rumah Lucinta Luna
+                  {description}
                 </Text>
               </View>
             </View>
@@ -295,7 +298,7 @@ export default class DetailPage extends Component {
           <FooterTab style={{backgroundColor: 'white'}}>
             <Left style={{flexDirection: 'column', marginHorizontal: 10}}>
               <Text style={{color: 'black', marginLeft: 20, fontFamily: 'Lato-Semibold', fontSize: 14}}>
-                Rp 800.000 / Bulan
+                Rp {price} / Bulan
               </Text>
               <Text style={{color: '#0baa56', marginLeft: 20, fontFamily: 'Lato-Semibold', fontSize: 14}}>
                 Lihat semua harga
@@ -307,7 +310,7 @@ export default class DetailPage extends Component {
                   Hubungi Kost
                 </Text>
               </Button>
-              <Button onPress={() => this.nextPage('booking')} style={{borderRadius: 10, height: 40, width: '50%', backgroundColor: '#ec7e2f', justifyContent: 'center', alignItems: 'center'}}>
+              <Button onPress={() => this.nextPage('booking',params)} style={{borderRadius: 10, height: 40, width: '50%', backgroundColor: '#ec7e2f', justifyContent: 'center', alignItems: 'center'}}>
                 <Text style={{color: 'white', fontSize: 14, fontFamily: 'Lato-Semibold', textAlign: 'center'}} uppercase={false}>
                   Booking
                 </Text>

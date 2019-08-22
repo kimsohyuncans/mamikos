@@ -11,6 +11,11 @@ import {
 
 
 export default class Map extends Component{
+
+  getCordinate(e){
+    e.persist();
+    e.nativeEvent;
+  }
   
   render(){
     return(
@@ -34,7 +39,7 @@ export default class Map extends Component{
         showsCompass={true}
         showsTraffic={true}
         draggable
-        onDragEnd={(e) => alert(e)}>
+        onDragEnd={(s) => alert("latitude : "+s.nativeEvent.coordinate.latitude+"\nlongitude : "+s.nativeEvent.coordinate.longitude)}>
 
           <Image source={require('../src/icon/pin3.png')} style={{height: 55,width: 50,resizeMode:'stretch'}} />
 

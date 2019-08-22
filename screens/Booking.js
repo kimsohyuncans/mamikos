@@ -37,9 +37,14 @@ export default class BookingPage extends Component {
     header: null
   };
 
-  nextPage(destination) {
+  nextPage(destination,senddata,date) {
       const { navigate } = this.props.navigation; 
-      navigate(destination);
+      navigate(destination,{
+        title : senddata.title,
+        price : senddata.price,
+        city : senddata.city,
+        datebook : date 
+      });
   };
 
    previousPage() {
@@ -48,6 +53,11 @@ export default class BookingPage extends Component {
   }
 
   render() {
+
+    // get data from previous page
+    const { params } = this.props.navigation.state
+    const { title,city,price} = params
+
     return (
       <Container>
         {/* HEADER */}
@@ -86,8 +96,9 @@ export default class BookingPage extends Component {
           </Item>
         </Header>
         <View style={{ backgroundColor: "white", height: 1 }}></View>
+        <ScrollView vertical showsVerticalScrollIndicator={false}>
         <Content style={{ marginHorizontal: 20 }}>
-          <ScrollView vertical>
+         
 
             {/* LOOP TANGGAL */}
             <View style={{justifyContent: 'space-between', flexDirection: 'row'}}>
@@ -145,14 +156,14 @@ export default class BookingPage extends Component {
                 }}
               >
                 <Text style={{ flex: 2, fontFamily: "Lato-Semibold" }}>
-                  Kost Arkademy Putra Bintaro Tangerang
+                  {title} {city}
                 </Text>
                 <Image
                   source={require("../src/img/detail/fasilitass.png")}
                   style={{ width: 141, height: 18, resizeMode: "contain" }}
                 />
                 <Text style={{ flex: 1, fontFamily: "Lato-Bold", marginTop: 2 }}>
-                  Rp 800.000 / bulan
+                  Rp {price} / bulan
                 </Text>
               </View>
             </View>
@@ -278,7 +289,7 @@ export default class BookingPage extends Component {
                 borderRadius: 6
               }}
 
-              onPress={() => this.nextPage('listbooking')}
+              onPress={() => this.nextPage('listbooking',params,this.state.chosenDate.toString().substr(4, 12))}
             >
               <Text
                 uppercase={false}
@@ -291,8 +302,8 @@ export default class BookingPage extends Component {
                 Book
               </Text>
             </Button>
-          </ScrollView>
         </Content>
+      </ScrollView>
       </Container>
     );
   }

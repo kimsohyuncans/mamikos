@@ -45,6 +45,10 @@ export default class ListBookingPage extends Component {
   }
 
   render() {
+
+    const { params } = this.props.navigation.state
+    const { title,price,city,datebook} = params
+    
     return (
       <Container>
          {/* HEADER */}
@@ -79,7 +83,7 @@ export default class ListBookingPage extends Component {
                 Booking
                 </Text>
                 <Text style={{fontFamily: 'Lato-Regular', marginTop: 0, marginLeft: 10, fontSize: 13}}>
-                18 Agu 2019
+                {datebook}
                 </Text>
                 </View>
                 <View style={{backgroundColor: 'white', flex: 1.3, flexDirection: 'column'}}>
