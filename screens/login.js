@@ -12,7 +12,7 @@ class LoginPage extends Component {
   constructor(props){
     super(props)
     AsyncStorage.getItem('token').then((res) => {
-      if(res != null ){
+      if(res !== null ){
         this.props.navigation.navigate('explore')
       }
     })
@@ -40,15 +40,18 @@ class LoginPage extends Component {
     
     
     // send request if user exist
-    axios.post("http://localhost:1337/api/v1/login",{
+    axios.post("http://localhost:8080/api/v1/login",{
       username : username,
       password : password,
 
     }).then( (response) => {
       
       if(response.data.status == "success"){
-        AsyncStorage.setItem('token',response.data.token).then(str => alert('token save')).catch(err => alert(err))
+        const token =  response.headers.authorization.split(' ');
+        AsyncStorage.setItem('token',token[1]).then(str => alert('token save')).catch(err => alert(err))
         navigate('explore')
+        
+
       }else{
         alert(response.data.msg)
       }

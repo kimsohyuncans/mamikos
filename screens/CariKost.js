@@ -95,7 +95,7 @@ class SearchKostPage extends Component {
     
 
     componentWillMount(){
-        Axios.get("http://localhost:1337/api/v1/listkost")
+        Axios.get("http://localhost:8080/api/v1/listkost")
         .then(response => {
             this.setState({
                 listkost : response.data
@@ -105,7 +105,7 @@ class SearchKostPage extends Component {
                 loading:false
             })
         })
-        .catch(err => alert(err))
+        .catch(err => alert(err.status))
     }
 
     // handleNavigateDetail(e) {
