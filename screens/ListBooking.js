@@ -131,7 +131,7 @@ export default class ListBookingPage extends Component {
                         Booking
                         </Text>
                         <Text style={{fontFamily: 'Lato-Regular', marginTop: 0, marginLeft: 10, fontSize: 13}}>
-                        18 Agu 2019
+                        {item.datebook}
                         </Text>
                         </View>
                         <View style={{backgroundColor: 'white', flex: 1.3, flexDirection: 'column'}}>
@@ -145,10 +145,10 @@ export default class ListBookingPage extends Component {
                         </View>
                         <View style={{backgroundColor: 'white', flex: 1, borderRadius: 10}}>
                         <Button style={{borderRadius: 10, height: 30, width: 160, marginRight:5, marginTop: 10, marginLeft: 10, backgroundColor: 'white', justifyContent: 'center', alignItems: 'center', borderRadius: 10, borderWidth: 1, borderColor: '#0baa56'}}>
-                      <Text style={{color: '#0baa56', fontSize: 14, fontFamily: 'Lato-Semibold', justifyContent: 'center', textAlign: 'center', alignItems: 'center'}} uppercase={false}>
-                        Confirmed
-                      </Text>
-                    </Button>
+              <Text style={{color: '#0baa56', fontSize: 14, fontFamily: 'Lato-Semibold', justifyContent: 'center', textAlign: 'center', alignItems: 'center'}} uppercase={false}>
+                {item.status}
+              </Text>
+            </Button>
                         </View>
                       </View>   
                     </View>
