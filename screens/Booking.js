@@ -60,7 +60,7 @@ export default class BookingPage extends Component {
       Axios.post("http://localhost:8080/api/v1/booking",{
         kost_id : data.id,
         datebook: date,
-        status : 'menunggu konfirmasi'
+        status : 'Tunggu konfirmasi'
       }, 
         {
           headers : {
@@ -324,7 +324,7 @@ export default class BookingPage extends Component {
                   borderRadius: 6
                 }}
   
-                onPress={() => this.booking(params,"432432")}
+                onPress={() => this.booking(params,this.state.chosenDate.toString().substr(4, 12))}
               >
                 <Text
                   uppercase={false}

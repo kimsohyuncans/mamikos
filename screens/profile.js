@@ -124,9 +124,13 @@ export default class ProfilePage extends Component{
 							<Image source={require('../src/img/hubungics.png')} resizeMode='contain' style={{width:25,height:25}}/>
 							<Text style={{marginLeft:10, fontFamily: 'Lato-Regular', fontSize: 15}}> Hubungi CS </Text>
 						</CardItem>
-						<CardItem header button onPress={() => this.removeItemValue('token')}>
+						<CardItem header button>
 							<Image source={require('../src/img/syarat.png')} resizeMode='contain' style={{width:25,height:25}}/>
 							<Text style={{marginLeft:10, fontFamily: 'Lato-Regular', fontSize: 15}}> Syarat dan Ketentuan </Text>
+						</CardItem>
+						<CardItem header button onPress={() => this.removeItemValue('token')}>
+							<Image source={require('../src/img/syarat.png')} resizeMode='contain' style={{width:25,height:25}}/>
+							<Text style={{marginLeft:10, fontFamily: 'Lato-Regular', fontSize: 15}}> Keluar </Text>
 						</CardItem>
 					</Card>
 					
