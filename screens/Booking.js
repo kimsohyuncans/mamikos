@@ -78,7 +78,7 @@ export default class BookingPage extends Component {
           console.log(result.data)
         }
 
-      }).catch(err => alert(err))
+      }).catch(err => alert(err.status))
   };
 
    previousPage() {
