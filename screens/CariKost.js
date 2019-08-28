@@ -26,7 +26,9 @@ import { Container,
 
 import Map from './map'   
 import Axios from 'axios';
-import{ connect } from 'react-redux'
+
+import {connect} from 'react-redux'
+import * as actiongetlistkost from './../redux/actions/getlistkost'
 
 class CariKost extends Component {
     constructor(props)
@@ -66,7 +68,7 @@ class CariKost extends Component {
             <LihatPeta />
           </Tab>
           <Tab heading="Daftar Kost" tabStyle={{backgroundColor: 'white'}} activeTabStyle={{backgroundColor: 'white'}} activeTextStyle={{color: '#0baa56', fontFamily: 'Lato-Semibold'}} textStyle={{color: '#0baa56', fontFamily: 'Lato-Semibold'}} tabContainerStyle={{ borderTopWidth: 0 }}>
-            <SearchKostPage okeoce={this.props.navigation} store={this.props.listkost}/>  
+            <SearchKostPage okeoce={this.props.navigation} store={this.props.listkost} action={this.props}/>  
           </Tab>
         </Tabs>
       </Container>
@@ -87,26 +89,10 @@ class LihatPeta extends Component {
 class SearchKostPage extends Component {
     constructor(props){
         super(props)
-        this.state = {
-            listkost : undefined,
-            loading : true
-        }
     }
 
-    
-
-    componentWillMount(){
-        Axios.get("http://localhost:8080/api/v1/listkost")
-        .then(response => {
-            this.setState({
-                listkost : response.data
-            });
-
-            this.setState({
-                loading:false
-            })
-        })
-        .catch(err => alert(err.status))
+    componentDidMount(){
+        this.props.action.getData()
     }
 
     // handleNavigateDetail(e) {
@@ -196,14 +182,19 @@ class SearchKostPage extends Component {
         }
         
     }
+    
 }
 
 const mapStateToProps = state => {
     return {
-        listkost : state.listkost
+      listkost: state.listkost
     }
-}
-
+  }
+  const mapDispatchToProps = dispatch => {
+    return {
+      getData: () => dispatch(actiongetlistkost.getDataKost()),
+    }
+  }
 
 
 const styles = StyleSheet.create({
@@ -214,4 +205,9 @@ const styles = StyleSheet.create({
       },
   })
 
-  export default connect(mapStateToProps,null)(CariKost)
+  
+  
+  export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(CariKost);

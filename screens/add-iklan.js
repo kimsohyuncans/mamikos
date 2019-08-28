@@ -136,6 +136,7 @@ export default class AddAdvertisementPage extends Component {
 			// console.log({"root respon":+response});
 			
 			alert(response.data.status)
+			this.props.navigation.navigate('searchkost')
 		}).catch(function (error) {
 			if (error.response) {
 			  

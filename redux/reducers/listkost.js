@@ -1,7 +1,9 @@
 import * as type from '../types';
 
 const initialState = {
-    data : ["data kosong"]
+    data : ["data kosong"],
+    isLoading : true,
+    isError : false,
 }
 
 export default function ListKost(state = initialState,action){
@@ -9,7 +11,6 @@ export default function ListKost(state = initialState,action){
         case type.GET_LIST_KOST:
             return {
                 ...state,
-                isLoading : true,
                 data : action.payload
             }
         case type.GET_LIST_KOST_FULFILLED:
