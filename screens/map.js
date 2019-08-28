@@ -44,9 +44,13 @@ export default class Map extends Component{
         onDragEnd={ (e) => {
           Axios.get(`https://us1.locationiq.com/v1/reverse.php?key=8065a39cebb499&lat=${e.nativeEvent.coordinate.latitude.toString()}&lon=${e.nativeEvent.coordinate.longitude.toString()}&format=json`)
           .then(r => {
+            
+            if(r.data.address.city !== undefined){
+              this.props.getlocation(r.data.display_name,r.data.address.city)
 
-            console.log(r.data.display_name)
-            this.props.getlocation(r.data.display_name)
+            }else{
+              this.props.getlocation(r.data.display_name,r.data.address.state)
+            }
             
           }).catch(err => alert(err))
           this.props.sendData(e.nativeEvent.coordinate.latitude.toString(),e.nativeEvent.coordinate.longitude.toString())

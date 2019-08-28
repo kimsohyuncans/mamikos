@@ -72,7 +72,7 @@ export default class DetailPage extends Component {
         <Content>
         <ScrollView vertical showsVerticalScrollIndicator={false}>
           <View style={{backgroundColor: 'white', height: 210}}>
-            <Image source={require('../src/img/list/kost1.jpg')} style={{height: 230, flex: 1, width: null}}/>
+            <Image source={{uri : `http://localhost:8080/static/${photos}`}} style={{height: 230, flex: 1, width: null}}/>
           </View>
           <View style={{backgroundColor: '#252525', flexDirection: 'row'}}>
           <View style={{flex:1}}>

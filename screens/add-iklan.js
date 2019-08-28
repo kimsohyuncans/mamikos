@@ -85,9 +85,10 @@ export default class AddAdvertisementPage extends Component {
   
 	}
 
-	getFullAddress (a){
+	getFullAddress (a,b){
 		this.setState({
-			fulladdress : a
+			fulladdress : a,
+			city : b
 		})
 	}
 
@@ -103,15 +104,15 @@ export default class AddAdvertisementPage extends Component {
 		const body = new FormData();
 		body.append('myimg', {
 			uri : this.state.imginfo.uri,
-			type : this.state.imginfo.type,
+			type : 'image/png',
 			name : `${Date.now()}${this.state.imginfo.fileName}`
 		})
 		body.append('title',this.state.title)
 		body.append('price', this.state.price)
 		body.append('description', this.state.description)
 		body.append('location',`${this.state.latitude}|${this.state.longitude}`)
-		body.append('city',this.state.fulladdress)
-		body.append('photos',`public/images/${Date.now()}${this.state.imginfo.fileName}`)
+		body.append('city',this.state.city)
+		body.append('photos',`${Date.now()}${this.state.imginfo.fileName}`)
 		body.append('seller',this.state.seller)
 		body.append('contact',this.state.contact)
 		body.append('gender',this.state.gender)
@@ -459,7 +460,7 @@ export default class AddAdvertisementPage extends Component {
 			   {/* KAKI */}
 			   <View style={{justifyContent: 'center', alignItems: 'center'}}>
 			   <Button
-			 	onPress={() => this.uploadimg()}  
+				onPress={() => this.uploadimg()}  
 			   style={{marginTop: 50, marginBottom: 50, justifyContent: 'center', alignItems: 'center', width: 300, backgroundColor: '#0baa56', borderRadius: 10}}><Text>Submit</Text></Button>
 			   </View>
 
