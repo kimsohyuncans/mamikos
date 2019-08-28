@@ -29,6 +29,8 @@ target 'Mamikos' do
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
+  pod 'react-native-image-picker', :path => '../node_modules/react-native-image-picker'
+
   target 'MamikosTests' do
     inherit! :search_paths
     # Pods for testing

@@ -20,13 +20,16 @@ import { Container,
 import CariKost from './CariKost';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 
-export default class Explore extends Component {
+//  redux requirement
+
+import {connect} from 'react-redux'
+import * as actiongetlistkost from './../redux/actions/getlistkost'
+
+class Explore extends Component {
 
   static navigationOptions = {
     header: null
   }
-
-  
 
   get pagination () {
     const { entries, activeSlide } = this.state;
@@ -84,6 +87,10 @@ export default class Explore extends Component {
           
       </View>
   );}
+
+  componentDidMount(){
+    this.props.getData()
+  }
   
   render() {
     return (
@@ -110,7 +117,7 @@ export default class Explore extends Component {
 
                   {/* HAI BOSKU, MAU CARI KOST DIMANA */}
                   <View style={{backgroundColor: 'white', flex: 2, marginHorizontal: 20, flexDirection: 'column', height: 125}}>
-                    <Text style={{fontSize: 23, fontFamily: 'Lato-Regular'}}>Hai, Kamu</Text>
+                    <Text style={{fontSize: 23, fontFamily: 'Lato-Regular'}}>Hai, {this.props.listkost.data[0].seller}</Text>
                     <Text style={{fontSize: 24, fontFamily: 'Lato-Semibold'}}>Mau cari Kost dimana ?</Text>
                     <TouchableOpacity onPress={()=> this.props.navigation.navigate('searchkost')}>
                     <View style={{marginTop: 20}}>
@@ -240,6 +247,22 @@ export default class Explore extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    listkost: state.listkost
+  }
+}
+const mapDispatchToProps = dispatch => {
+  return {
+    getData: () => dispatch(actiongetlistkost.getDataKost()),
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Explore);
 
 
 const styles = StyleSheet.create({

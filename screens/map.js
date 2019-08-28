@@ -6,11 +6,13 @@ import {
   StyleSheet,
   Image
 } from 'react-native'
+import Axios from 'axios';
 
 
 
 
 export default class Map extends Component{
+  
 
   getCordinate(e){
     e.persist();
@@ -39,7 +41,19 @@ export default class Map extends Component{
         showsCompass={true}
         showsTraffic={true}
         draggable
-        onDragEnd={(s) => alert("latitude : "+s.nativeEvent.coordinate.latitude+"\nlongitude : "+s.nativeEvent.coordinate.longitude)}>
+        onDragEnd={ (e) => {
+          Axios.get(`https://us1.locationiq.com/v1/reverse.php?key=8065a39cebb499&lat=${e.nativeEvent.coordinate.latitude.toString()}&lon=${e.nativeEvent.coordinate.longitude.toString()}&format=json`)
+          .then(r => {
+
+            console.log(r.data.display_name)
+            this.props.getlocation(r.data.display_name)
+            
+          }).catch(err => alert(err))
+          this.props.sendData(e.nativeEvent.coordinate.latitude.toString(),e.nativeEvent.coordinate.longitude.toString())
+          
+          
+        }}>
+
 
           <Image source={require('../src/icon/pin3.png')} style={{height: 55,width: 50,resizeMode:'stretch'}} />
 

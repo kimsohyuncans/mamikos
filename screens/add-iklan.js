@@ -23,9 +23,10 @@ import { Container,
 	CheckBox,
    } from 'native-base';
 
-import {View,TouchableOpacity,ScrollView,StyleSheet,Image} from 'react-native';
+import {View,TouchableOpacity,ScrollView,StyleSheet,Image,TextInput,AsyncStorage} from 'react-native';
 import ImagePicker from "react-native-image-picker";
 import Map from './map';
+import axios from 'axios';
 
 const options = {
 	title: "Select a photo",
@@ -41,11 +42,120 @@ const options = {
 
 export default class AddAdvertisementPage extends Component {
 
-	state = {
+	constructor(props){
+		super(props)
+		AsyncStorage.getItem('token')
+		.then( res => {
+			this.setState({
+				token : res
+			})
+		}).catch(err => alert('app error please restart the app'))
+
+		this.state = {
+			title : null,
+			price : null,
+			description : null,
+			location : null,
+			city : null,
+			photos : null,
+			contact : null,
+			availablerooms : null,
+			seller : null,
+			gender : null,
+			large: null,
+			facility : null,
+			create_by: 9,
+			itemOne: false,
+			itemTwo: false,
+			itemThree: false, 
+			itemFour: false,
+			selected2: undefined,
+			avatarSource: null,
+			latitude : '0',
+			longitude : '0',
+			token : '',
+			fulladdress : null
+
+			
+		}
+
+		this.uploadimg = this.uploadimg.bind(this)
+		this.handleMapMarker = this.handleMapMarker.bind(this)
+		this.getFullAddress = this.getFullAddress.bind(this)
+  
+	}
+
+	getFullAddress (a){
+		this.setState({
+			fulladdress : a
+		})
+	}
+
+	handleMapMarker(a,b){
+		this.setState({
+			latitude : a,
+			longitude : b,
+		})
+	}
+
+
+	uploadimg(){
+		const body = new FormData();
+		body.append('myimg', {
+			uri : this.state.imginfo.uri,
+			type : this.state.imginfo.type,
+			name : `${Date.now()}${this.state.imginfo.fileName}`
+		})
+		body.append('title',this.state.title)
+		body.append('price', this.state.price)
+		body.append('description', this.state.description)
+		body.append('location',`${this.state.latitude}|${this.state.longitude}`)
+		body.append('city',this.state.fulladdress)
+		body.append('photos',`public/images/${Date.now()}${this.state.imginfo.fileName}`)
+		body.append('seller',this.state.seller)
+		body.append('contact',this.state.contact)
+		body.append('gender',this.state.gender)
+		body.append('availablerooms',this.state.availablerooms)
+		body.append('large',this.state.large)
+		body.append('facility',`${this.state.itemOne},${this.state.itemTwo},${this.state.itemThree},${this.state.itemFour}`)
+
+		console.log(`file name is : ${Date.now()}${this.state.imginfo.fileName}`)
+		const config = { headers: { 'Content-Type': 'multipart/form-data',"Authorization" : `Bearer ${this.state.token}` } };
+
+
+	
  
-		avatarSource: null,
-	  
-	  };
+		axios.post("http://localhost:8080/api/v1/uploadimg",body,config).then(response => {
+			
+			// if you need a complete output for debug
+			console.log({"respon data":response.data});
+			// console.log("respon status : "+response.status);
+			// console.log("respon status text : "+response.statusText);
+			// console.log({"respon headers":response.headers});
+			// console.log({"root respon":+response});
+			
+			alert(response.data.status)
+		}).catch(function (error) {
+			if (error.response) {
+			  
+			
+			//   console.log({"ini error respon " : error.response.data});
+			//   console.log({"ini error respon status " : error.response.status});
+			//   console.log({"ini error respon headers" : error.response.headers});
+			} else if (error.request) {
+			  // The request was made but no response was received
+			  // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+			  // http.ClientRequest in node.js
+			  console.log({"ini error request" :error.request});
+			} else {
+			  // Something happened in setting up the request that triggered an Error
+			  console.log({'Error ' : error.message});
+			}
+			console.log({"ini error config " : error.config});
+		  });
+
+		
+	}
 	
 	handleChoosePhoto = () => {
 		
@@ -65,6 +175,10 @@ export default class AddAdvertisementPage extends Component {
 		  
 			  this.setState({
 				avatarSource: source,
+				imginfo : response,
+				data : {
+					photos :source
+				}
 			  });
 			}
 		  });
@@ -74,19 +188,12 @@ export default class AddAdvertisementPage extends Component {
     header: null
   }
 
-	constructor(props){
-		super(props);
-		this.state = {itemOne: false, itemTwo: false, itemThree: false, itemFour: false},
-  
-		this.state = {
-			selected2: undefined
-		  };
-		
-	}
+
+	
 
 	onValueChange2(value: string) {
 		this.setState({
-		  selected2: value
+		  gender: value
 		});
 	  }
 
@@ -130,34 +237,46 @@ export default class AddAdvertisementPage extends Component {
 					<Label style={styles.label}>Judul Iklan</Label>
 					</View>
 	        		<Item  style={{borderBottomColor: '#0baa56'}}>
-	        			<Input  style={{marginLeft: -5}} placeholderTextColor="#bcbcbc" placeholder="Masukan judul iklan kost"/>
+	        			<TextInput  style={{marginLeft: -5}} placeholderTextColor="#bcbcbc" placeholder="Masukan judul iklan kost"
+						onChangeText={(e) => {
+							this.setState({
+								title : e
+							})
+						}}
+						value={this.state.kostname}/>
 	        		</Item>
 					<View style={{marginLeft: 15}}>
 	        		<Label style={styles.label}>Harga Kost Perbulan</Label>
 					</View>
 	        		<Item style={{borderBottomColor: '#0baa56'}}>
-	        			<Input style={{marginLeft: -5}} placeholderTextColor="#bcbcbc"  placeholder="Masukan harga kost, misalnya: 80000" keyboardType={'numeric'}/>
+	        			<Input style={{marginLeft: -5}} placeholderTextColor="#bcbcbc"  placeholder="Masukan harga kost, misalnya: 80000" keyboardType={'numeric'}
+						onChangeText={(e) => {
+							this.setState({
+								price : e
+							})
+						}}/>
 	        		</Item>
 						<View style={{marginLeft: 10}}>
 	        			<Label style={styles.label}>Deskripsi Kost</Label>
 						</View>
-	        			<Textarea  rowSpan={3.5} placeholderTextColor="#bcbcbc"  placeholder="Masukan Deskripsi Kost, misalnya: Kost sudah termasuk kasur, dekat dengan Bootcamp Arkademy, listrik ditanggung lucinta " style={styles.textarea}/>
+	        			<Textarea  rowSpan={3.5} placeholderTextColor="#bcbcbc"  placeholder="Masukan Deskripsi Kost, misalnya: Kost sudah termasuk kasur, dekat dengan Bootcamp Arkademy, listrik ditanggung lucinta " style={styles.textarea}
+						onChangeText={(e) => {
+							this.setState({
+								description : e
+							})
+						}}/>
 
 
 		       		<Label style={{marginTop: 20, fontFamily: 'Lato-Semibold', fontSize: 20, marginLeft: 10}}>Lokasi Kost</Label>
 		       		<Item style={{borderBottomColor: '#0baa56'}}>
 		       			<Icon name='ios-search'/>
-		       			<Input style={{ fontFamily: 'Lato-Semibold', fontSize: 16}} placeholderTextColor="#bcbcbc" placeholder="Search"/>
-						   <Button onPress={() => alert('coming soon')} style={{borderRadius: 10, backgroundColor: '#0baa56', marginRight: -10}}>
-							   <Text uppercase={false}>
-								   Ubah Lokasi 
-							   </Text>
-							</Button>
+		    			<Input style={{ fontFamily: 'Lato-Semibold', fontSize: 16}} placeholderTextColor="#bcbcbc" placeholder="Search"
+						value={this.state.fulladdress}/>
 		       		</Item>
 		       	</Form>
 
 		       	<View style={styles.map} >
-		       		<Map />
+		       		<Map sendData={this.handleMapMarker} getlocation={this.getFullAddress}/>
 		       	</View>
 
 				{/* LONG LAT */}
@@ -165,13 +284,13 @@ export default class AddAdvertisementPage extends Component {
 					<View style={{flex: 1, backgroundColor: 'transparent', marginTop: 5}}>
 						<Item style={styles.item} floatingLabel>
 						<Label style={styles.labelText}>Masukan Latitude...</Label>
-						<Input/>
+						<Input value={this.state.latitude}/>
 						</Item>
 					</View>
 					<View style={{flex: 1, backgroundColor: 'transparent', marginTop: 5}}>
 						<Item style={styles.item} floatingLabel>
-						<Label style={styles.labelText}>Masukan Longlitude...	</Label>
-						<Input/>
+						<Label style={styles.labelText}>Masukan Longitude...	</Label>
+						<Input value={this.state.longitude}/>
 						</Item>
 					</View>
 				</View>
@@ -182,7 +301,12 @@ export default class AddAdvertisementPage extends Component {
 		       		<Label style={styles.label}>Tuliskan alamat lengkap penjual</Label>
 					</View>
 		       		<Item style={{borderBottomColor: '#0baa56'}}>
-		       			<Input rowSpan={4} style={{marginLeft: -10}} placeholderTextColor="#bcbcbc" placeholder="Masukan alamat misalnya: jalan, kecamatan" />
+		       			<Input rowSpan={4} style={{marginLeft: -10}} placeholderTextColor="#bcbcbc" placeholder="Masukan alamat misalnya: jalan, kecamatan" 
+						onChangeText={(e) => {
+							this.setState({
+								location : e
+							})
+						}}/>
 		       		</Item>
 
 					
@@ -192,16 +316,17 @@ export default class AddAdvertisementPage extends Component {
 					
 					<View>
 		       		<Label style={styles.label}>Masukkan Foto</Label>
-					   <TouchableOpacity tittle={"Choose Photo"} onPress={this.handleChoosePhoto} style={{width: 100,height: 100, flexDirection: 'row'}}>
-					   <Image source={require('../src/icon/addimage.png')} style={{width: 138,height:110,resizeMode: 'contain',marginTop: 10, marginBottom: 20}}/>
+					  
 					   
 					   
-		       		{ this.state.avatarSource === null ? <TouchableOpacity tittle={"Choose Photo"} onPress={this.handleChoosePhoto} style={{width: 100,height: 100, flexDirection: 'row'}}>
-					   <Image source={require('../src/icon/addimage.png')} style={{width: 138,height:110,resizeMode: 'contain',marginTop: 10, marginBottom: 20}}/>
-					   </TouchableOpacity>  :
-              <Image style={{width: 138,height:110,resizeMode: 'contain',marginTop: 10, marginBottom: 20, marginLeft: 20}} source={this.state.avatarSource} />
+					   
+		       			{ this.state.avatarSource === null ? <TouchableOpacity tittle={"Choose Photo"} onPress={this.handleChoosePhoto} style={{width: 100,height: 100, flexDirection: 'row'}}>
+					   	<Image source={require('../src/icon/addimage.png')} style={{width: 138,height:110,resizeMode: 'contain',marginTop: 10, marginBottom: 20}}/></TouchableOpacity>  :
+						<TouchableOpacity onPress={this.handleChoosePhoto}>
+              				<Image style={{width: 138,height:110,resizeMode: 'contain',marginTop: 10, marginBottom: 20, marginLeft: 20}} source={this.state.avatarSource} />
+						</TouchableOpacity>
             }
-				</TouchableOpacity></View>
+					</View>
 					   
 		       		  
 
@@ -210,7 +335,12 @@ export default class AddAdvertisementPage extends Component {
 						Jumlah Kamara
 					</Label>
 		       		<Item style={{ marginLeft: -5, borderBottomColor: '#0baa56'}}>
-		       			<Input  placeholderTextColor="#bcbcbc" placeholder='Masukan jumlah kamar' keyboardType={'numeric'}/>
+		       			<Input  placeholderTextColor="#bcbcbc" placeholder='Masukan jumlah kamar' keyboardType={'numeric'}
+						onChangeText={(e) => {
+							this.setState({
+								availablerooms : e
+							})
+							}}/>
 		       		</Item>
 
 					{/* LUAS KAMAR */}
@@ -221,14 +351,24 @@ export default class AddAdvertisementPage extends Component {
 						<View style={{flex: 1, backgroundColor: 'transparent', marginTop: -15}}>
 							<Item style={styles.item} floatingLabel >
 							<Label numberOfLines={1} style={styles.labelText}>Masukan Luas...</Label>
-							<Input keyboardType={'numeric'}/>
+							<Input keyboardType={'numeric'}
+							onChangeText={(e) => {
+								this.setState({
+									large : e
+								})
+							}}/>
 							</Item>
 						</View>
 						<Text style={{marginTop: 30, fontFamily: 'Lato-Semibold', marginHorizontal: 10}}>X</Text>
 						<View style={{flex: 1, backgroundColor: 'transparent', marginTop: -15, marginLeft: -10}}>
 							<Item style={styles.item} floatingLabel>
 							<Label numberOfLines={1} style={styles.labelText}>Masukan Lebar...</Label>
-							<Input keyboardType={'numeric'}/>
+							<Input keyboardType={'numeric'}
+							onChangeText={(e) => {
+								this.setState({
+									large : this.state.large + "x" + e
+								})
+							}}/>
 							</Item>
 						</View>
 					</View>
@@ -257,13 +397,19 @@ export default class AddAdvertisementPage extends Component {
 					</Label>
 					<View style={{marginLeft: -15}}>
 					<ListItem style={{ borderBottomColor: '#0baa56' }} onPress={() => this.setState({ itemOne: !this.state.itemOne })} >
-              <CheckBox color={'#0baa56'} style={{borderRadius: 5}} checked={this.state.itemOne} onPress={() => this.setState({ itemOne: !this.state.itemOne })} />
+              <CheckBox color={'#0baa56'} style={{borderRadius: 5}} checked={this.state.itemOne} onPress={() => {
+				  this.setState({ itemOne: !this.state.itemOne,
+				facility : this.state.facility + '-kasur' })
+			  }} />
               <Body>
                 <Text>Kasur</Text>
               </Body>
             </ListItem>
             <ListItem style={{ borderBottomColor: '#0baa56' }} onPress={() => this.setState({ itemTwo: !this.state.itemTwo })} >
-              <CheckBox color={'#0baa56'} style={{borderRadius: 5}} checked={this.state.itemTwo} onPress={() => this.setState({ itemTwo: !this.state.itemTwo })} />
+              <CheckBox color={'#0baa56'} style={{borderRadius: 5}} checked={this.state.itemTwo} onPress={() => {
+				  this.setState({ itemTwo: !this.state.itemTwo,
+				facility : this.state.facility + '-wifi' })
+			  }} />
               <Body>
                 <Text>Wifi - Internet</Text>
               </Body>
@@ -286,13 +432,23 @@ export default class AddAdvertisementPage extends Component {
 						{/* NAMA LENGKAP */}
 					   <Label style={{fontFamily: 'Lato-Semibold', fontSize: 19, marginTop: 25}}>Nama Lengkap</Label>
 		       		<Item style={{ marginLeft: -5, borderBottomColor: '#0baa56'}}>
-		       			<Input  placeholderTextColor="#bcbcbc" placeholder='Masukan nama lengkap atau sapaan anda'/>
+		       			<Input  placeholderTextColor="#bcbcbc" placeholder='Masukan nama lengkap atau sapaan anda'
+						onChangeText={(e) => {
+							this.setState({
+								seller : e
+							})
+						}}/>
 		       		</Item>
 
 					   {/* NOMOR TELEPON */}
 					   <Label style={{fontFamily: 'Lato-Semibold', fontSize: 19, marginTop: 25}}>Nomor Telepon</Label>
 		       		<Item style={{ marginLeft: -5, borderBottomColor: '#0baa56'}}>
-		       			<Input  placeholderTextColor="#bcbcbc" placeholder='Masukan nomor telepon yg bisa dihubungi' keyboardType={'numeric'}/>
+		       			<Input  placeholderTextColor="#bcbcbc" placeholder='Masukan nomor telepon yg bisa dihubungi' keyboardType={'numeric'}
+						onChangeText={(e) => {
+							this.setState({
+								contact : e
+							})
+						}}/>
 		       		</Item>
 					</View>
 		       		
@@ -302,7 +458,9 @@ export default class AddAdvertisementPage extends Component {
 
 			   {/* KAKI */}
 			   <View style={{justifyContent: 'center', alignItems: 'center'}}>
-			   <Button style={{marginTop: 50, marginBottom: 50, justifyContent: 'center', alignItems: 'center', width: 300, backgroundColor: '#0baa56', borderRadius: 10}}><Text>Submit</Text></Button>
+			   <Button
+			 	onPress={() => this.uploadimg()}  
+			   style={{marginTop: 50, marginBottom: 50, justifyContent: 'center', alignItems: 'center', width: 300, backgroundColor: '#0baa56', borderRadius: 10}}><Text>Submit</Text></Button>
 			   </View>
 
 

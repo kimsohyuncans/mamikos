@@ -4,7 +4,12 @@ import { Container, Header, Left, Body, Right, Title,Button,Form,Item,Icon,Input
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import axios from 'axios'
 
-import AddAdvertisement from './add-iklan';
+// redux requirement
+import {connect} from 'react-redux'
+import * as getUserAction from './../redux/actions/getuser'
+
+
+
 import RegisterPage from './register'
 
 class LoginPage extends Component {
@@ -62,6 +67,11 @@ class LoginPage extends Component {
 
   }
 
+ 
+ 
+
+  
+
 
   render() {
     return (
@@ -112,6 +122,9 @@ class LoginPage extends Component {
     );
   }
 }
+
+
+
 
 
 export default LoginPage

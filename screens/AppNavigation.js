@@ -1,23 +1,81 @@
-import { createStackNavigator, createAppContainer } from 'react-navigation';
-import LoginPage from './login';
-import AddAdvertisement from './add-iklan';
-import Map from './map';
+import React, {Component} from "react";
+import { View, Text,Button } from "react-native";
+
+import {
+  createAppContainer,
+  createBottomTabNavigator,
+  createDrawerNavigator,
+  createStackNavigator,
+  createSwitchNavigator,
+} from 'react-navigation';
 
 
-const AddAdvertisementNav = createStackNavigator({
-	AddAdvertisementPage : {
-		screen : AddAdvertisement
+{/* importing screen */}
+
+import Map from './map'
+import LoginPage from './/login'
+import AddAdvertisementPage from './/add-iklan'
+import RegisterPage from './/register'
+import Explore from './Explore'
+import SearchKostPage from './CariKost'
+import DetailPage from './DetailKost'
+import ProfilePage from './profile'
+import BookingPage from './Booking'
+import ListBookingPage from './ListBooking'
+
+
+
+const AuthenticationStack = createStackNavigator({
+
+	login : {
+		screen : LoginPage
 	},
-	MapPage : {
-		screen : Map
+	register : {
+		screen : RegisterPage
+	}
+})
+ 
+
+const HomeStack = createStackNavigator({
+	explore : {
+		screen : Explore
 	},
+
+	searchkost : {
+		screen : SearchKostPage
+	},
+
+	detailkost :  {
+		screen : DetailPage
+	},
+
+	booking : {
+		screen : BookingPage
+	},
+
+	listbooking : {
+		screen : ListBookingPage
+	},
+
+	addadvertisement : {
+		screen : AddAdvertisementPage
+	},
+	profilePage : {
+		screen : ProfilePage
+	}
 })
 
-const LoginPageNav = createStackNavigator({
-	Login : {
-		screen : LoginPage,
+const AppNavigator = createSwitchNavigator({
+	Authentication : {
+		screen : AuthenticationStack
 	},
-	AddAdvertisement : AddAdvertisementNav
 
+	Home : {
+		screen : HomeStack
+	}
 })
+
+const AppRootNavigator = createAppContainer(AppNavigator)
+
+export default AppRootNavigator
 

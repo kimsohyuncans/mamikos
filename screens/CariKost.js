@@ -26,8 +26,9 @@ import { Container,
 
 import Map from './map'   
 import Axios from 'axios';
+import{ connect } from 'react-redux'
 
-export default class CariKost extends Component {
+class CariKost extends Component {
     constructor(props)
     {
         super(props);
@@ -65,7 +66,7 @@ export default class CariKost extends Component {
             <LihatPeta />
           </Tab>
           <Tab heading="Daftar Kost" tabStyle={{backgroundColor: 'white'}} activeTabStyle={{backgroundColor: 'white'}} activeTextStyle={{color: '#0baa56', fontFamily: 'Lato-Semibold'}} textStyle={{color: '#0baa56', fontFamily: 'Lato-Semibold'}} tabContainerStyle={{ borderTopWidth: 0 }}>
-            <SearchKostPage okeoce={this.props.navigation} />  
+            <SearchKostPage okeoce={this.props.navigation} store={this.props.listkost}/>  
           </Tab>
         </Tabs>
       </Container>
@@ -115,20 +116,20 @@ class SearchKostPage extends Component {
     // }
 
     render(){
-        if(this.state.loading == false){
+        if(this.props.store.isLoading == false){
             return(
                 <Container>
                     <ScrollView vertical showsVerticalScrollIndicator={false}>
                         <Content>
                             <FlatList
-                            data = {this.state.listkost}
+                            data = {this.props.store.data}
                             renderItem ={ ( {item} ) => (
                                 
                                 <TouchableOpacity  onPress={() => {
                                     this.props.okeoce.navigate('detailkost',  item )}} >
                                     <View style={{backgroundColor: 'white', height: 320, marginTop: 20, marginHorizontal: 10}}>
                                         <View style={{ justifyContent: 'center', alignItems: 'center'}}>
-                                            <Image source={require('../src/img/list/kost1.jpg')} style={{ width: 330, height: 200, borderRadius: 5, marginHorizontal: 0}}></Image>
+                                            <Image source={require('../src/img/list/kost1.jpg')} style={{ width: '90%', height: 200, borderRadius: 5, marginHorizontal: 0}}></Image>
                                         </View>
                                         <View style={{flexDirection: 'row', marginTop: 5}}>
                                             <Text style={{color: '#4A92E6', marginLeft: 25}}>
@@ -197,6 +198,14 @@ class SearchKostPage extends Component {
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        listkost : state.listkost
+    }
+}
+
+
+
 const styles = StyleSheet.create({
     shadow: {
         shadowColor: '#202020',
@@ -204,3 +213,5 @@ const styles = StyleSheet.create({
         shadowRadius: 5,
       },
   })
+
+  export default connect(mapStateToProps,null)(CariKost)

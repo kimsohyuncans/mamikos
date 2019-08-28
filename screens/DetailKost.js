@@ -127,7 +127,7 @@ export default class DetailPage extends Component {
           </View>
 
           {/* TIDAK TERMASUK TIDAK ADA */}
-          <View style={{backgroundColor: 'white', height: 40, justifyContent: 'center', marginTop: 5}}>
+          <View style={{backgroundColor: 'white', height: 40, justifyContent: 'center',alignItems:'center', marginTop: 5}}>
           <View style={{flexDirection: 'row',marginTop: 0}}>
            
          
