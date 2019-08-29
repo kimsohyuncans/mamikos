@@ -3,7 +3,8 @@ import { Image,
         View, 
         ScrollView,
         StyleSheet,
-        FlatList
+        FlatList,
+        Share
       } from 'react-native';
 import { Container, 
         Header, 
@@ -22,6 +23,26 @@ import {connect} from 'react-redux'
 
 
 class DetailPage extends Component {
+  onShare = async () => {
+    try {
+      const result = await Share.share({
+        message:
+          'KostFinder',
+      });
+
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
 
   static navigationOptions = {
     header: null
@@ -151,29 +172,12 @@ class DetailPage extends Component {
             <Button style={styles.buttonheader}>
               <Icon style={styles.headericon} name="md-heart" />
             </Button>
-            <Button style={styles.buttonheader}>
+            <Button onPress={this.onShare} style={styles.buttonheader}>
               <Icon style={styles.headericon} name="md-share" />
             </Button>
           </Right>
         </Header>
-        <Fab
-          active={this.state.active}
-          direction="down"
-          containerStyle={{marginTop: -20, marginRight: -10}}
-          position="topRight"
-          style={{backgroundColor: 'white', marginTop: -10, shadowOffset: { width: 0, height: 0 }, shadowRadius: 0, elevation: 2}}
-          onPress={() => this.setState({ active: !this.state.active })}>
-          <Icon name="md-share" style={{color: '#0baa56'}} />
-          <Button style={{ backgroundColor: '#25D366'}}>
-            <Icon name="logo-whatsapp" />
-          </Button>
-          <Button style={{ backgroundColor: '#3b5998'}}>
-            <Icon name="logo-facebook" />
-          </Button>
-          <Button disabled style={{ backgroundColor: '#d44638'}}>
-            <Icon name="mail" />
-          </Button>
-        </Fab>
+
 
         {/* KONTEN */}
         <Content>
