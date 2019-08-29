@@ -62,9 +62,6 @@ export default class DetailPage extends Component {
             <Button style={styles.buttonheader}>
               <Icon style={styles.headericon} name="md-heart" />
             </Button>
-            <Button style={styles.buttonheader}>
-              <Icon style={styles.headericon} name="md-share" />
-            </Button>
           </Right>
         </Header>
 
