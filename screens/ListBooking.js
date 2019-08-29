@@ -118,7 +118,7 @@ export default class ListBookingPage extends Component {
               renderItem = { ( {item} ) => (
                 <View style={{backgroundColor: 'white', height: 190}}> 
                     <View elevation={10} style={{marginHorizontal: 20, backgroundColor: 'white', height: 150, marginTop: 20, borderRadius: 10, flexDirection: 'row'}}>
-                    <Image source={require('../src/img/list/kost2.jpg')} style={{width: "100%", height: '100%', resizeMode: "cover", flex: 1, borderRadius: 10}}/>
+                    <Image source={{uri : `https://mamikos.herokuapp.com/static/${item.kostID.photos}`}} style={{width: "100%", height: '100%', resizeMode: "cover", flex: 1, borderRadius: 10}}/>
                       <View style={{backgroundColor: 'white', flex: 2.2, borderRadius: 10, flexDirection: 'column'}}>
                         <View style={{backgroundColor: 'white', flex: 1, borderRadius: 10}}>
                         <Text ellipsizeMode='tail' numberOfLines={1}  style={{fontFamily: 'Lato-Bold', marginTop: 20, marginLeft: 10, fontSize: 14}}>
