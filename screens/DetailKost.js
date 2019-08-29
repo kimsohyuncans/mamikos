@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Image, 
         View, 
         ScrollView,
-        StyleSheet
+        StyleSheet,
+        FlatList
       } from 'react-native';
 import { Container, 
         Header, 
@@ -16,8 +17,9 @@ import { Container,
         Badge,
         Icon
        } from 'native-base';
+import {connect} from 'react-redux'
 
-export default class DetailPage extends Component {
+class DetailPage extends Component {
 
   static navigationOptions = {
     header: null
@@ -29,6 +31,7 @@ export default class DetailPage extends Component {
 
     this.nextPage = this.nextPage.bind(this);
     this.previousPage = this.previousPage.bind(this)
+    this.kostmenarik = this.kostmenarik.bind(this)
 }
 
   nextPage(destination,senddata) {
@@ -39,6 +42,63 @@ export default class DetailPage extends Component {
   previousPage() {
     const { goBack } = this.props.navigation;
     goBack();
+  }
+
+  kostmenarik(){
+    return(
+      <React.Fragment>
+      <View style={{backgroundColor: 'white', height: 260, marginHorizontal: 20, marginTop: 30}}>
+        <Text style={{color: 'black', fontFamily: 'Lato-Semibold', fontSize: 20}}>
+          Kos Menarik Lainnyaa  
+        </Text>
+          {/* GARIS GRAY */}
+        <View style={{backgroundColor: '#dbdbdb', height: 1, marginTop: 5}}/>
+
+          {/* LIST KOST MENARIK */}
+          <View>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              <View style={{flexDirection: 'row'}}>
+
+                {/* LOOP HERE */}
+                <FlatList
+                horizontal
+                data = {this.props.listkost.data}
+                renderItem = { ( {item } ) => (
+
+                  <View style={{flex: 0.8, backgroundColor: 'white', marginLeft: 10, height: 180, width: 180, marginTop: 10, borderRadius: 5}}>
+                    <View style={{backgroundColor: 'white', height: 30}}>
+                      <Button style={{width: 180, height: 30, borderRadius: 5, backgroundColor: 'white', borderColor: '#0baa56', justifyContent: 'center', alignItems: 'center', borderWidth: 1}}>
+                        <Text style={{color: '#0baa56', fontFamily: 'Lato-Regular'}}>Ada {item.availablerooms} Kamar</Text>
+                      </Button>
+                      <Image source={{uri : `https://mamikos.herokuapp.com/static/${item.photos}`}} style={{height: 150, width: 180, resizeMode: 'cover', borderRadius: 5}}/>
+                      <View style={{backgroundColor: 'black', opacity: 0.5, height: 50, marginTop: -50, flexDirection: 'column', borderRadius: 5}}>
+                      </View>
+                      <View style={{marginTop: -50, marginLeft: 5, borderRadius: 5}}>
+                        <Text style={{color: 'white', fontFamily: 'Lato-Regular', fontSize: 18}}>{item.price}</Text>
+                        <Text style={{color: 'white', fontFamily: 'Lato-Regular', fontSize: 18}}>{item.title}</Text>
+                      </View>
+                      <View style={{marginTop: -47, marginLeft: 95, borderRadius: 5}}>
+                        <View style={{backgroundColor: '#9b59b6', height: 23, width: 75, borderRadius: 5}}>
+                          <Text style={{marginLeft: 3, fontFamily: 'Lato-Regular', color: 'white'}}>
+                            {item.gender}
+                          </Text>
+                        </View>
+                      </View>
+                    </View>
+                  </View>
+
+                
+                )}/>
+                
+              </View>
+              
+            </ScrollView>
+          </View>
+        </View>
+      <View style={{backgroundColor: '#dbdbdb', height: 1, marginTop: 15}}/>
+    </React.Fragment>
+
+    )
   }
 
 
@@ -191,104 +251,8 @@ export default class DetailPage extends Component {
             </View>
 
            {/* KOS MENARIK */}
-           <View style={{backgroundColor: 'white', height: 260, marginHorizontal: 20, marginTop: 30}}>
-            <Text style={{color: 'black', fontFamily: 'Lato-Semibold', fontSize: 20}}>
-              Kos Menarik Lainnyaa  
-            </Text>
-              {/* GARIS GRAY */}
-            <View style={{backgroundColor: '#dbdbdb', height: 1, marginTop: 5}}/>
-
-              {/* LIST KOST MENARIK */}
-              <View>
-                <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                  <View style={{flexDirection: 'row'}}>
-
-                    {/* LOOP HERE */}
-                    <View style={{flex: 0.8, backgroundColor: 'white', marginLeft: 0, height: 180, width: 180, marginTop: 10, borderRadius: 5}}>
-                      <View style={{backgroundColor: 'white', height: 30}}>
-                        <Button style={{width: 180, height: 30, borderRadius: 5, backgroundColor: 'white', borderColor: '#0baa56', justifyContent: 'center', alignItems: 'center', borderWidth: 1}}>
-                          <Text style={{color: '#0baa56', fontFamily: 'Lato-Regular'}}>Ada 10 Kamar</Text>
-                        </Button>
-                        <Image source={require('../src/img/list/kost1.jpg')} style={{height: 150, width: 180, resizeMode: 'cover', borderRadius: 5}}/>
-                        <View style={{backgroundColor: 'black', opacity: 0.5, height: 50, marginTop: -50, flexDirection: 'column', borderRadius: 5}}>
-                        </View>
-                        <View style={{marginTop: -50, marginLeft: 5, borderRadius: 5}}>
-                          <Text style={{color: 'white', fontFamily: 'Lato-Regular', fontSize: 18}}>{"  Rp.800..."}</Text>
-                          <Text style={{color: 'white', fontFamily: 'Lato-Regular', fontSize: 18}}>Kost Arkademy Putra</Text>
-                        </View>
-                        <View style={{marginTop: -47, marginLeft: 95, borderRadius: 5}}>
-                          <View style={{backgroundColor: '#9b59b6', height: 23, width: 75, borderRadius: 5}}>
-                            <Text style={{marginLeft: 3, fontFamily: 'Lato-Regular', color: 'white'}}>
-                              CAMPUR
-                            </Text>
-                          </View>
-                        </View>
-                      </View>
-                    </View>
-                   {/* END LOOP HERE */}
-
-                    {/* LOOP HERE */}
-                    <View style={{flex: 0.8, backgroundColor: 'white', marginLeft: 10, height: 180, width: 180, marginTop: 10, borderRadius: 5}}>
-                      <View style={{backgroundColor: 'white', height: 30}}>
-                        <Button style={{width: 180, height: 30, borderRadius: 5, backgroundColor: 'white', borderColor: '#ec7e2f', justifyContent: 'center', alignItems: 'center', borderWidth: 1}}>
-                          <Text style={{color: '#ec7e2f', fontFamily: 'Lato-Regular'}}>Tinggal 1 kamar</Text>
-                        </Button>
-                        <Image source={require('../src/img/list/kost2.jpg')} style={{height: 150, width: 180, resizeMode: 'cover', borderRadius: 5}}/>
-                        <View style={{backgroundColor: 'black', opacity: 0.5, height: 50, marginTop: -50, flexDirection: 'column', borderRadius: 5}}>
-                        </View>
-                        <View style={{marginTop: -50, marginLeft: 5, borderRadius: 5}}>
-                          <Text style={{color: 'white', fontFamily: 'Lato-Regular', fontSize: 18}}>{"  Rp.800.0..."}</Text>
-                          <Text style={{color: 'white', fontFamily: 'Lato-Regular', fontSize: 18}}>Kost Arkademy Putra</Text>
-                        </View>
-                        <View style={{marginTop: -47, marginLeft: 110, borderRadius: 5}}>
-                          <View style={{backgroundColor: '#4A92E6', height: 23, width: 60, borderRadius: 5}}>
-                            <Text style={{marginLeft: 3, fontFamily: 'Lato-Regular', color: 'white'}}>
-                              PUTRA
-                            </Text>
-                          </View>
-                        </View>
-                      </View>
-                    </View>
-                   {/* END LOOP HERE */}
-
-                    {/* LOOP HERE */}
-                    <View style={{flex: 0.8, backgroundColor: 'white', marginLeft: 10, height: 180, width: 180, marginTop: 10, borderRadius: 5}}>
-                      <View style={{backgroundColor: 'white', height: 30}}>
-                        <Button style={{width: 180, height: 30, borderRadius: 5, backgroundColor: 'white', borderColor: '#0baa56', justifyContent: 'center', alignItems: 'center', borderWidth: 1}}>
-                          <Text style={{color: '#0baa56', fontFamily: 'Lato-Regular'}}>Ada 10 Kamar</Text>
-                        </Button>
-                        <Image source={require('../src/img/list/kost3.jpg')} style={{height: 150, width: 180, resizeMode: 'cover', borderRadius: 5}}/>
-                        <View style={{backgroundColor: 'black', opacity: 0.5, height: 50, marginTop: -50, flexDirection: 'column', borderRadius: 5}}>
-                        </View>
-                        <View style={{marginTop: -50, marginLeft: 5, borderRadius: 5}}>
-                          <Text style={{color: 'white', fontFamily: 'Lato-Regular', fontSize: 18}}>{"  Rp.800.00..."}</Text>
-                          <Text style={{color: 'white', fontFamily: 'Lato-Regular', fontSize: 18}}>Kost Arkademy Putri</Text>
-                        </View>
-                        <View style={{marginTop: -47, marginLeft: 115, borderRadius: 5}}>
-                          <View style={{backgroundColor: '#FF5492', height: 23, width: 55, borderRadius: 5}}>
-                            <Text style={{marginLeft: 3, fontFamily: 'Lato-Regular', color: 'white'}}>
-                              PUTRI
-                            </Text>
-                          </View>
-                        </View>
-                      </View>
-                    </View>
-                   {/* END LOOP HERE */}
-                  
-                
-
-
-
-
-                    
-                  </View>
-                </ScrollView>
-              </View>
-
-               {/* GARIS GRAY */}
-            <View style={{backgroundColor: '#dbdbdb', height: 1, marginTop: 15}}/>
-
-           </View>
+           {this.kostmenarik()}
+           
           
         </ScrollView>
         </Content>
@@ -305,7 +269,7 @@ export default class DetailPage extends Component {
               </Text>
             </Left>
             <Right style={{flexDirection: 'row', marginHorizontal: 10}}>
-              <Button style={{borderRadius: 10, height: 40, width: '50%', marginRight:5 , backgroundColor: 'white', justifyContent: 'center', alignItems: 'center', borderRadius: 10, borderWidth: 1, borderColor: '#ec7e2f'}}>
+              <Button style={{borderRadius: 10, height: 40, width: '50%', marginRight:5 , backgroundColor: 'white', justifyContent: 'center', alignItems: 'center', borderRadius: 10, borderWidth: 1, borderColor: '#ec7e2f'}} onPress={() => alert(this.props.listkost.data[0].title)}>
                 <Text style={{color: '#ec7e2f', fontSize: 14, fontFamily: 'Lato-Semibold', justifyContent: 'center', textAlign: 'center', alignItems: 'center'}} uppercase={false}>
                   Hubungi Kost
                 </Text>
@@ -323,6 +287,12 @@ export default class DetailPage extends Component {
     );
   }
 }
+const mapStateToProps = state => {
+  return{
+    listkost : state.listkost
+  }
+}
+export default connect(mapStateToProps,null)(DetailPage);
 
 const styles = StyleSheet.create({
 
