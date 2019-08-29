@@ -334,7 +334,7 @@ export default class AddAdvertisementPage extends Component {
 
 					{/* JUMLAH KAMAR */}
 					<Label style={{fontFamily: 'Lato-Semibold', fontSize: 19, marginTop: 40}}>
-						Jumlah Kamara
+						Jumlah Kamar
 					</Label>
 		       		<Item style={{ marginLeft: -5, borderBottomColor: '#0baa56'}}>
 		       			<Input  placeholderTextColor="#bcbcbc" placeholder='Masukan jumlah kamar' keyboardType={'numeric'}

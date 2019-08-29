@@ -20,6 +20,7 @@ import { Container,
        } from 'native-base';
 import {connect} from 'react-redux'
 
+
 class DetailPage extends Component {
 
   static navigationOptions = {
@@ -104,6 +105,31 @@ class DetailPage extends Component {
     )
   }
 
+  getFacility(e){
+    console.log(e)
+    return(
+      <React.Fragment>
+        {e[0] == 'true' ? ( <Image source={require('../src/img/detail/kasur.png')} style={{width: 82, height: 100, resizeMode: "contain"}}/> ) : null}
+        {e[1] == 'true' ? ( <Image source={require('../src/img/detail/kamarmandi.png')} style={{width: 125, height: 100, resizeMode: "contain"}}/> ) : null}
+        {e[2] == 'true' ? ( <Image source={require('../src/img/detail/wifi.png')} style={{width: 120, height: 100, resizeMode: "contain"}} /> ) : null}
+        {e[3] == 'true' ? ( <Image source={require('../src/img/detail/kunci.png')} style={{width: 137, height: 100, resizeMode: "contain"}}/> ) : null }
+
+        
+        
+      </React.Fragment>
+    )
+    
+    // if(e[0] == 'true'){
+    //   return(
+    //     
+    //   )
+    // }
+    // if(e[2] == 'true'){
+    //   return (
+        
+    //   )
+    // }
+  }
 
 
 
@@ -212,7 +238,7 @@ class DetailPage extends Component {
           <View style={{flexDirection: 'row',marginTop: 0}}>
            
          
-              <Text style={{color: 'black', marginLeft: 20, fontFamily: 'Lato-Regular', fontSize: 15}}>
+              <Text style={{color: 'black', marginLeft: 0, fontFamily: 'Lato-Regular', fontSize: 15}}>
               <Image source={require('../src/icon/detailkost/listrik.png')} style={{height: 18,width: 18}}/>{" Tidak Termasuk Listrik"}
               </Text>       
               
@@ -252,10 +278,11 @@ class DetailPage extends Component {
             </Text>
             </View>
             <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{flexDirection: 'row', marginTop: 10}}>
-            <Image source={require('../src/img/detail/kasur.png')} style={{width: 82, height: 100, resizeMode: "contain"}}/>
-            <Image source={require('../src/img/detail/kamarmandi.png')} style={{width: 125, height: 100, resizeMode: "contain"}}/>
+            
+            {this.getFacility(facility.split(','))}
+            {/* <Image source={require('../src/img/detail/kamarmandi.png')} style={{width: 125, height: 100, resizeMode: "contain"}}/>
             <Image source={require('../src/img/detail/wifi.png')} style={{width: 120, height: 100, resizeMode: "contain"}}/>
-            <Image source={require('../src/img/detail/kunci.png')} style={{width: 137, height: 100, resizeMode: "contain"}}/>
+            <Image source={require('../src/img/detail/kunci.png')} style={{width: 137, height: 100, resizeMode: "contain"}}/> */}
             </ScrollView>
             </View>
 
@@ -298,10 +325,10 @@ class DetailPage extends Component {
                       Pemilik Kost
                       </Text>
                       <Text style={{color: 'black', fontFamily: 'Lato-Regular', fontSize: 18, flex: 1}}>
-                      Angga Priyatna
+                      {seller}
                       </Text>
                       <Text style={{color: 'black', fontFamily: 'Lato-Regular', fontSize: 18, flex: 1}}>
-                      089693482xxx
+                      {contact}
                       </Text>
                     </View>
                   </View>
