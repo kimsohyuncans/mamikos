@@ -278,7 +278,7 @@ export default class AddAdvertisementPage extends Component {
 		       	</Form>
 
 		       	<View style={styles.map} >
-		       		<Map sendData={this.handleMapMarker} getlocation={this.getFullAddress}/>
+		       		<Map sendData={this.handleMapMarker} getlocation={this.getFullAddress} Mode={'getdata'}/>
 		       	</View>
 
 				{/* LONG LAT */}

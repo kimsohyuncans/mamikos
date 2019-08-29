@@ -81,7 +81,7 @@ class CariKost extends Component {
 class LihatPeta extends Component {
     render(){
         return(
-         <Map />        
+         <Map Mode={'normal'} />        
         )
     }
 }
