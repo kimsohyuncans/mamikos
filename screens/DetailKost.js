@@ -15,7 +15,8 @@ import { Container,
         Button, 
         Text, 
         Badge,
-        Icon
+        Icon,
+        Fab
        } from 'native-base';
 import {connect} from 'react-redux'
 
@@ -27,7 +28,9 @@ class DetailPage extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      active: false
+    };
 
     this.nextPage = this.nextPage.bind(this);
     this.previousPage = this.previousPage.bind(this)
@@ -127,6 +130,24 @@ class DetailPage extends Component {
             </Button>
           </Right>
         </Header>
+        <Fab
+          active={this.state.active}
+          direction="down"
+          containerStyle={{marginTop: -20, marginRight: -10}}
+          position="topRight"
+          style={{backgroundColor: 'white', marginTop: -10, shadowOffset: { width: 0, height: 0 }, shadowRadius: 0, elevation: 2}}
+          onPress={() => this.setState({ active: !this.state.active })}>
+          <Icon name="md-share" style={{color: '#0baa56'}} />
+          <Button style={{ backgroundColor: '#25D366'}}>
+            <Icon name="logo-whatsapp" />
+          </Button>
+          <Button style={{ backgroundColor: '#3b5998'}}>
+            <Icon name="logo-facebook" />
+          </Button>
+          <Button disabled style={{ backgroundColor: '#d44638'}}>
+            <Icon name="mail" />
+          </Button>
+        </Fab>
 
         {/* KONTEN */}
         <Content>
@@ -221,8 +242,8 @@ class DetailPage extends Component {
             </View>
             </View>
 
-             {/* FASILITAS KOST */}
-             <View style={{flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 20, alignItems: 'center'}}>
+            {/* FASILITAS KOST */}
+            <View style={{flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 20, alignItems: 'center'}}>
              <Text style={{color: 'black', marginTop: 20, fontFamily: 'Lato-Semibold', fontSize: 20}}>
                 Fasilitas kost dan kamar
             </Text>
@@ -231,8 +252,10 @@ class DetailPage extends Component {
             </Text>
             </View>
             <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{flexDirection: 'row', marginTop: 10}}>
-            <Image source={require('../src/img/detail/fasilitas.png')} style={{width: 481, height: 100, resizeMode: "contain"}}/>
-            <Image source={require('../src/img/detail/fasilitas.png')} style={{width: 481, height: 100, resizeMode: "contain"}}/>
+            <Image source={require('../src/img/detail/kasur.png')} style={{width: 82, height: 100, resizeMode: "contain"}}/>
+            <Image source={require('../src/img/detail/kamarmandi.png')} style={{width: 125, height: 100, resizeMode: "contain"}}/>
+            <Image source={require('../src/img/detail/wifi.png')} style={{width: 120, height: 100, resizeMode: "contain"}}/>
+            <Image source={require('../src/img/detail/kunci.png')} style={{width: 137, height: 100, resizeMode: "contain"}}/>
             </ScrollView>
             </View>
 
@@ -248,6 +271,41 @@ class DetailPage extends Component {
                 </Text>
               </View>
             </View>
+            </View>
+
+            {/* Pemilik Kost */}
+
+            <View>
+              <View style={{backgroundColor: '#f8f8f8', height: 70, marginTop: 30}}>
+         
+                  <Text style={{color: 'black', fontFamily: 'Lato-Regular', fontSize: 16, flex: 1, marginHorizontal: 20}}>
+                    Data bisa berubah sewaktu-waktu,
+                  </Text>
+                  <Text style={{color: 'black', fontFamily: 'Lato-Regular', fontSize: 16, flex: 1, marginHorizontal: 20}}>
+                    tanyakan data saat ini
+                  </Text>
+                
+              </View>
+            </View>
+            <View>
+                <View style={{backgroundColor: '#f8f8f8', height: 100, marginTop: 0, flexDirection: 'row'}}>
+                  <View style={{backgroundColor: 'transparent', flex: 0.3, justifyContent: 'center', alignItems: 'center', alignContent: 'center'}}>
+                    <Image source={require('../src/img/home.png')} style={{height: 80, width: 80}} />
+                  </View>       
+                  <View style={{backgroundColor: 'transparent', flex: 0.7, flexDirection: 'column'}}>
+                    <View style={{backgroundColor: 'transparent', flex: 1}}>
+                      <Text style={{color: 'black', fontFamily: 'Lato-Semibold', fontSize: 20, flex: 1}}>
+                      Pemilik Kost
+                      </Text>
+                      <Text style={{color: 'black', fontFamily: 'Lato-Regular', fontSize: 18, flex: 1}}>
+                      Angga Priyatna
+                      </Text>
+                      <Text style={{color: 'black', fontFamily: 'Lato-Regular', fontSize: 18, flex: 1}}>
+                      089693482xxx
+                      </Text>
+                    </View>
+                  </View>
+                </View>
             </View>
 
            {/* KOS MENARIK */}
