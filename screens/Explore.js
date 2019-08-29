@@ -94,7 +94,7 @@ class Explore extends Component {
         {/* HEADER */}
         <Header style={{backgroundColor: 'white', flexDirection: 'row', height: 30, borderBottomColor: 'white', elevation: 0}} androidStatusBarColor="white">
           <View style={{flex: 1, backgroundColor: 'white', width: '100%'}}>
-          <Image source={require('../src/icon/logo.png')} style={{ width: '90%', height: '90%',resizeMode: 'contain', marginLeft: -70, marginTop: 0 }}/>
+          <Image source={require('../src/icon/logo2.png')} style={{ width: '90%', height: '90%',resizeMode: 'contain', marginLeft: -95, marginTop: 5 }}/>
           </View>
         </Header>
 
