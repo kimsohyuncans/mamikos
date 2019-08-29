@@ -115,7 +115,7 @@ class SearchKostPage extends Component {
                                     this.props.okeoce.navigate('detailkost',  item )}} >
                                     <View style={{backgroundColor: 'white', height: 320, marginTop: 20, marginHorizontal: 10}}>
                                         <View style={{ justifyContent: 'center', alignItems: 'center'}}>
-                                            <Image source={{uri : `http://localhost:8080/static/${item.photos}`}} style={{ width: '90%', height: 200, borderRadius: 5, marginHorizontal: 0}}></Image>
+                                            <Image source={{uri : `https://mamikos.herokuapp.com/static/${item.photos}`}} style={{ width: '90%', height: 200,resizeMode:'contain', borderRadius: 5, marginHorizontal: 0}}></Image>
                                         </View>
                                         <View style={{flexDirection: 'row', marginTop: 5}}>
                                             <Text style={{color: '#4A92E6', marginLeft: 25}}>

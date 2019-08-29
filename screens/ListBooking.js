@@ -68,7 +68,7 @@ export default class ListBookingPage extends Component {
 // get booking list
 
   getmybooking(res){
-    Axios.get("http://localhost:8080/api/v1/mybooking",{
+    Axios.get("https://mamikos.herokuapp.com/api/v1/mybooking",{
       
       headers : {
         "Authorization" : `Bearer ${res}`

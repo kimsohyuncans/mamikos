@@ -72,7 +72,7 @@ export default class DetailPage extends Component {
         <Content>
         <ScrollView vertical showsVerticalScrollIndicator={false}>
           <View style={{backgroundColor: 'white', height: 210}}>
-            <Image source={{uri : `http://localhost:8080/static/${photos}`}} style={{height: 230, flex: 1, width: null}}/>
+            <Image source={{uri : `https://mamikos.herokuapp.com/static/${photos}`}} style={{height: '100%', flex: 1, width: '100%',resizeMode:'contain'}}/>
           </View>
           <View style={{backgroundColor: '#252525', flexDirection: 'row'}}>
           <View style={{flex:1}}>

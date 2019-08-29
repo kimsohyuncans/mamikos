@@ -57,7 +57,7 @@ export default class BookingPage extends Component {
   booking(data,date) {
       const { navigate } = this.props.navigation; 
       this.setState({ isReady : false });
-      Axios.post("http://localhost:8080/api/v1/booking",{
+      Axios.post("https://mamikos.herokuapp.com/api/v1/booking",{
         kost_id : data.id,
         datebook: date,
         status : 'Tunggu konfirmasi'
@@ -90,7 +90,7 @@ export default class BookingPage extends Component {
 
     // get data from previous page
     const { params } = this.props.navigation.state
-    const { id,title,city,price} = params
+    const { id,title,city,photos,price} = params
 
     if(this.state.isReady == true){
       return (
@@ -177,7 +177,7 @@ export default class BookingPage extends Component {
                   style={{ flex: 2, backgroundColor: "red", marginVertical: 20 }}
                 >
                   <Image
-                    source={require("../src/img/list/kost1.jpg")}
+                    source={{uri : `https://mamikos.herokuapp.com/static/${photos}`}}
                     style={{ width: "100%", height: "100%", resizeMode: "cover" }}
                   />
                 </View>

@@ -28,7 +28,7 @@ class RegisterPage extends Component {
   register(){
 
     const { username,password } = this.state
-    axios.post('http://localhost:8080/api/v1/regis',{
+    axios.post('https://mamikos.herokuapp.com/api/v1/regis',{
       username : username,
       password : password
     }).then( (response) => {

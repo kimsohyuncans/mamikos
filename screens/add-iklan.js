@@ -126,7 +126,7 @@ export default class AddAdvertisementPage extends Component {
 
 	
  
-		axios.post("http://localhost:8080/api/v1/uploadimg",body,config).then(response => {
+		axios.post("https://mamikos.herokuapp.com/api/v1/uploadimg",body,config).then(response => {
 			
 			// if you need a complete output for debug
 			console.log({"respon data":response.data});

@@ -45,7 +45,7 @@ class LoginPage extends Component {
     
     
     // send request if user exist
-    axios.post("http://localhost:8080/api/v1/login",{
+    axios.post("https://mamikos.herokuapp.com/api/v1/login",{
       username : username,
       password : password,
 
