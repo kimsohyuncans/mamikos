@@ -3,5 +3,5 @@ import axios from 'axios'
 
 export const getDataKost = () => ({
     type : type.GET_LIST_KOST,
-    payload : axios.get('https://mamikos.herokuapp.com/api/v1/listkost')
+    payload : axios.get('http://localhost:8080/api/v1/listkost')
 })
